@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.Servo;
+import com.seattlesolvers.solverslib.command.Command;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 public class Gate extends SubsystemBase {
@@ -44,6 +46,15 @@ public class Gate extends SubsystemBase {
 //
 //
 //    }
+    public Command openCommand(){
+
+        return new InstantCommand(()-> open(),this);
+    }
+    public Command closeCommand(){
+
+        return new InstantCommand(()-> close(), this);
+
+    }
 
 
 
