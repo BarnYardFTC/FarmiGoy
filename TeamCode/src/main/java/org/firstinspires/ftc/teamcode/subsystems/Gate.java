@@ -3,8 +3,9 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.Servo;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
 
-public class Gate {
+public class Gate extends SubsystemBase {
 
     private Servo rightServo, leftServo;
 
@@ -40,7 +41,12 @@ public class Gate {
 //    public void displayTelemetry(){
 //
 //
+//
+//
 //    }
+
+
+
 
 
 }
