@@ -58,6 +58,7 @@ public class Hardware {
         this.hwMap = hwMap; //provided by the opmode
 
         initServos();
+        initSensors();
     }
 
     private void initServos() {
@@ -65,5 +66,9 @@ public class Hardware {
         rightGateServo = hwMap.get(Servo.class, RIGHT_GATE_CONFIG_NAME);
 
         hoodServo = hwMap.get(Servo.class, SHOOTER_HOOD_CONFIG_NAME);
+    }
+
+    private void initSensors(){
+        limeLight = hwMap.get(Limelight3A.class, "limelight");
     }
 }

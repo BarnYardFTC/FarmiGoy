@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.seattlesolvers.solverslib.command.Robot;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
@@ -17,6 +18,7 @@ public class BarnRobot extends Robot {
 
     public Gate gate;
     public Hood hood;
+    public LimeLight limelight;
 
 
     //Gamepads
@@ -58,6 +60,9 @@ public class BarnRobot extends Robot {
 
     public void initHood() {
         hood = new Hood();
+    }
+    public void initLimeLight(){
+        limelight = new LimeLight();
     }
 
 
