@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
+
+import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class Hood extends SubsystemBase {
 
@@ -17,7 +17,7 @@ public class Hood extends SubsystemBase {
 
 
     public Hood(){
-        servo =  hardwareMap.get(Servo.class, "shooterHood");
+        servo = BarnRobot.getInstance().hardware.hoodServo;
         servo.setDirection(Servo.Direction.REVERSE);
         servo.setPosition(MAX);
 

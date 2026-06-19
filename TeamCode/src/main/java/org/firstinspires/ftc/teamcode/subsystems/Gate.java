@@ -7,6 +7,8 @@ import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
+import org.firstinspires.ftc.teamcode.BarnRobot;
+
 public class Gate extends SubsystemBase {
 
     private Servo rightServo, leftServo;
@@ -18,8 +20,8 @@ public class Gate extends SubsystemBase {
 
 
     public Gate(){
-        rightServo = hardwareMap.get(Servo.class, "rightGate");
-        leftServo = hardwareMap.get(Servo.class,"leftGate");
+        rightServo = BarnRobot.getInstance().hardware.rightGateServo;
+        leftServo = BarnRobot.getInstance().hardware.leftGateServo;
         rightServo.setDirection(Servo.Direction.FORWARD);
         leftServo.setDirection(Servo.Direction.REVERSE);
         //call function to close gate

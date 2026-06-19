@@ -29,7 +29,7 @@ public class LimeLight extends SubsystemBase {
 
 
     public LimeLight(){
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight = BarnRobot.getInstance().hardware.limeLight;
         limelight.pipelineSwitch(closePipeline);
         limelight.setPollRateHz(POLL_RATE_HZ);
         resetData();
