@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.util;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -51,14 +52,22 @@ public class Hardware {
 
     public DcMotorEx shooterMotorLeft;
     public DcMotorEx shooterMotorRight;
+    public DcMotor intakeMotor;
 
     //Constructor
 
     public Hardware(HardwareMap hwMap) {
         this.hwMap = hwMap; //provided by the opmode
 
+        initMotors();
         initServos();
         initSensors();
+    }
+
+    private void initMotors() {
+        intakeMotor = hwMap.get(DcMotorEx.class, INTAKE_CONFIG_NAME);
+        shooterMotorLeft = hwMap.get(DcMotorEx.class, SHOOTER_LEFT_CONFIG_NAME);
+        shooterMotorRight = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
     }
 
     private void initServos() {

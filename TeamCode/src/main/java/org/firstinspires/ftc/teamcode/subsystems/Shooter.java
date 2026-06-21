@@ -1,15 +1,10 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
-import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
@@ -45,20 +40,20 @@ public class Shooter extends SubsystemBase {
         shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    private void updateDriver() {
-
-        double shooterRange = MAX_SHOOTER_VELOCITY - MIN_SHOOTER_VELOCITY;
-
-        targetShooterVelocity = MIN_SHOOTER_VELOCITY + ((shooterRange / (SHOOTER_VELOCITY_STAGES - 1)) * (currentShooterVelocityStage - 1));
-
-        if (shooterEnabled) {
-            shooterLeft.setVelocity(targetShooterVelocity);
-            shooterRight.setVelocity(targetShooterVelocity);
-        } else {
-            shooterLeft.setVelocity(0);
-            shooterRight.setVelocity(0);
-        }
-    }
+//    private void updateDriver() {
+//
+//        double shooterRange = MAX_SHOOTER_VELOCITY - MIN_SHOOTER_VELOCITY;
+//
+//        targetShooterVelocity = MIN_SHOOTER_VELOCITY + ((shooterRange / (SHOOTER_VELOCITY_STAGES - 1)) * (currentShooterVelocityStage - 1));
+//
+//        if (shooterEnabled) {
+//            shooterLeft.setVelocity(targetShooterVelocity);
+//            shooterRight.setVelocity(targetShooterVelocity);
+//        } else {
+//            shooterLeft.setVelocity(0);
+//            shooterRight.setVelocity(0);
+//        }
+//    }
 
     /*private void telemetryUpdate() {
 
