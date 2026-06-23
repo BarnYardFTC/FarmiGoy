@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems.components;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
@@ -9,29 +8,24 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 public class MechanumDriveComponent {
 
 
-    private final DcMotorEx leftFront;
-    private final DcMotorEx rightFront;
-    private final DcMotorEx leftBack;
-    private final DcMotorEx rightBack;
+    private final DcMotor leftFront;
+    private final DcMotor rightFront;
+    private final DcMotor leftBack;
+    private final DcMotor rightBack;
 
     private double spdX;
     private double spdY;
     private double spdTurn;
-
     private double speedModifier;
 
     private static final double SLOW_SPEED = 0.3;
     private static final double FAST_SPEED = 1.0;
-    private static double turnModifier = 1;
-
-    private static final double speedMultiplier = 1;
-    private static final double turnMultiplier = 1;
 
     public MechanumDriveComponent(){
-        this.leftFront = BarnRobot.getInstance().Hardware.leftFrontDriveTrain;
-        this.rightFront = BarnRobot.getInstance().Hardware.rightFrontDriveTrain;
-        this.leftBack = BarnRobot.getInstance().Hardware.leftBackDriveTrain;
-        this.rightBack = BarnRobot.getInstance().Hardware.rightBackDriveTrain;
+        this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
+        this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
+        this.leftBack = BarnRobot.getInstance().hardware.leftBackDrivetrain;
+        this.rightBack = BarnRobot.getInstance().hardware.rightBackDrivetrain;
 
         initMotor(DcMotorSimple.Direction.REVERSE, leftFront);
         initMotor(DcMotorSimple.Direction.REVERSE, rightFront);
@@ -55,4 +49,51 @@ public class MechanumDriveComponent {
         activateFastMode();
     }
 
+    private void activateFastMode(){
+        speedModifier = FAST_SPEED;
+    }
+
+    private void activateSlowMode(){
+        speedModifier = SLOW_SPEED;
+    }
+
+    public void translateSpeedToPower() {
+        double lf = spdY + spdX + spdTurn;
+        double lb = spdY - spdX + spdTurn;
+        double rf = spdY - spdX - spdTurn;
+        double rb = spdY + spdX - spdTurn;
+
+        // Normalize powers if needed
+        double maxPower = Math.max(Math.max(Math.abs(lf), Math.abs(lb)),
+                Math.max(Math.abs(rf), Math.abs(rb)));
+        if (maxPower > 1.0) {
+            lf /= maxPower;
+            lb /= maxPower;
+            rf /= maxPower;
+            rb /= maxPower;
+        }
+
+        // Apply speed modifier
+        lf *= speedModifier;
+        lb *= speedModifier;
+        rf *= speedModifier;
+        rb *= speedModifier;
+
+        // Set motor powers
+        leftFront.setPower(lf);
+        leftBack.setPower(lb);
+        rightFront.setPower(rf);
+        rightBack.setPower(rb);
+    }
+
+    public void setSpeed(double spdX, double spdY, double spdTurn){
+        this.spdX = spdX;
+        this.spdY = spdY;
+        this.spdTurn = spdTurn;
+    }
+
+    public void driveNonFieldCentric(double x, double y, double turn){
+        setSpeed(x,y,turn * speedModifier);
+        translateSpeedToPower();
+    }
 }

@@ -54,6 +54,12 @@ public class Hardware {
     public DcMotorEx shooterMotorRight;
     public DcMotor intakeMotor;
 
+    public DcMotor leftFrontDrivetrain;
+    public DcMotor rightFrontDrivetrain;
+    public DcMotor leftBackDrivetrain;
+    public DcMotor rightBackDrivetrain;
+
+
     //Constructor
 
     public Hardware(HardwareMap hwMap) {
@@ -68,6 +74,10 @@ public class Hardware {
         intakeMotor = hwMap.get(DcMotorEx.class, INTAKE_CONFIG_NAME);
         shooterMotorLeft = hwMap.get(DcMotorEx.class, SHOOTER_LEFT_CONFIG_NAME);
         shooterMotorRight = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
+        leftFrontDrivetrain = hwMap.get(DcMotor.class, LEFT_FRONT_DRIVETRAIN_CONFIG_NAME);
+        rightFrontDrivetrain = hwMap.get(DcMotor.class, RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME);
+        leftBackDrivetrain = hwMap.get(DcMotor.class, LEFT_BACK_DRIVETRAIN_CONFIG_NAME);
+        rightBackDrivetrain = hwMap.get(DcMotor.class, RIGHT_BACK_DRIVETRAIN_CONFIG_NAME);
     }
 
     private void initServos() {
