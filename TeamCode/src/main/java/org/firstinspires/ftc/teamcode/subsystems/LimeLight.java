@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
 import java.util.List;
@@ -71,51 +72,74 @@ public class LimeLight extends SubsystemBase {
         }
     }
 
-    double oldTa = 0;
-    double avgArea = 0;
-    double stability = 0;
-
+    double distSum = 0;
+    double distCount = 0;
     double goalDistance = 1;
     LLResultTypes.FiducialResult closestGoal = null;
     double bestDiff = 1000;
-    public double goalDistanceV1() {
+    public double getGoalDistance() {
         if (isGoalDetected()) {
             closestGoal = frs.get(0);
 
             for (LLResultTypes.FiducialResult fr : frs) {
-                if (goalStabCheck(oldTa, fr.getTargetArea()) > 500) {
-                    avgArea /= stability;
-
-                    if (fr.getTargetArea() - avgArea < bestDiff) {
-                        bestDiff = fr.getTargetArea() - avgArea;
-                        closestGoal = fr;
-                    }
-                }
-
-                else if (fr.getTargetArea() > closestGoal.getTargetArea()) {
+                if (fr.getTargetArea() > closestGoal.getTargetArea()) {
                     closestGoal = fr;
                 }
-
-                oldTa = fr.getTargetArea();
-
             }
-            goalDistance = closestGoal.getCameraPoseTargetSpace().getPosition().z;
-        }
 
+            goalDistance = closestGoal.getTargetPoseCameraSpace().getPosition().z;
+
+        }
         return goalDistance;
+
     }
 
-    public double goalStabCheck(double oldTa, double nextTa){
-        if (nextTa - oldTa < 0.2){
-            stability ++;
-            avgArea += oldTa;
+    double goalYaw = -1;
+    public double getGoalYaw(){
+        if (isGoalDetected()){
+            closestGoal = frs.get(0);
+
+            for (LLResultTypes.FiducialResult fr : frs) {
+                if (fr.getTargetArea() > closestGoal.getTargetArea()) {
+                    closestGoal = fr;
+                }
+            }
+
+            goalYaw = closestGoal.getCameraPoseTargetSpace().getOrientation().getYaw();
         }
-        else stability = 0;
 
-        return stability;
+        return goalYaw;
     }
 
+    public int choosePipeline(){
+        if (getGoalDistance() > 2.8){
+            if (alianceCol) return farRedPipeline;
+            return farBluePipeline;
+        }
+        return closePipeline;
+    }
 
+    @Override
+    public void periodic() {
+        super.periodic();
+        llResult = limelight.getLatestResult();
+        frs = llResult.getFiducialResults();
+        limelight.pipelineSwitch(choosePipeline());
+    }
 
+    //i need bot heading to make ut work
+//    public Pose2D getBotPose(){
+//        if (llResult.getBotpose_MT2() != null){
+//            Pose2D currentPos = new Pose2D(llResult.getBotpose_MT2().getPosition().x / 0.0254 ,llResult.getBotpose_MT2().getPosition().y / 0.0254);
+//        }
+//    }
 
+    public void displayTelemetry(Telemetry telemetry){
+        telemetry.addData("Current pipeline: ", choosePipeline());
+
+        if(isGoalDetected()){
+            telemetry.addData("Limelight distance: ", getGoalDistance());
+            telemetry.addData("Limelight yaw: ", getGoalYaw());
+        }
+    }
 }
