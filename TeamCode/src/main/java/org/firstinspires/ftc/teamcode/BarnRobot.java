@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.seattlesolvers.solverslib.command.Robot;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
@@ -52,6 +53,20 @@ public class BarnRobot extends Robot {
 
 
     //TODO: init
+
+    public void init(OpMode opMode){
+
+        this.hardware = new Hardware(opMode.hardwareMap);
+        this.telemetry = opMode.telemetry;
+
+        gamepadEx1 = new GamepadEx(opMode.gamepad1);
+
+        initGate();
+        initIntake();
+        initHood();
+        initLimeLight();
+        initDriveTrain();
+    }
 
 
     //Subsystems initialisation

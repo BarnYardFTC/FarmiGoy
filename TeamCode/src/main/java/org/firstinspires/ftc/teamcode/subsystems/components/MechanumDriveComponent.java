@@ -49,11 +49,11 @@ public class MechanumDriveComponent {
         activateFastMode();
     }
 
-    private void activateFastMode(){
+    public void activateFastMode(){
         speedModifier = FAST_SPEED;
     }
 
-    private void activateSlowMode(){
+    public void activateSlowMode(){
         speedModifier = SLOW_SPEED;
     }
 
