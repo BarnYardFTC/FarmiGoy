@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,28 +10,30 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
+@Configurable
 public class Shooter extends SubsystemBase {
 
-    private static final int MIN_SHOOTER_VELOCITY = 800;
-    private static final int MAX_SHOOTER_VELOCITY = 1300;
+    private static final double TICKS_PER_REVOLUTION = 28;
+    private static final double IDEAL_RPM = 3030;
 
-    private static final int SHOOTER_VELOCITY_STAGES = 10;
+    private static final double DETLA_TIME = 100;
+
+    private double kV, kS, kP;
 
     private DcMotorEx shooterLeft;
     private DcMotorEx shooterRight;
 
-    private GamepadEx gamepad;
+    private double lastTime;
 
-    private boolean shooterEnabled = false;
+    private int lastPosition;
+    private double rpm;
 
-    private int currentShooterVelocityStage = 1;
-
-    private double targetShooterVelocity;
 
     public Shooter() {
-
+        
         shooterLeft = BarnRobot.getInstance().hardware.shooterMotorLeft;
         shooterRight = BarnRobot.getInstance().hardware.shooterMotorRight;
+
 
         shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         shooterRight.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -38,7 +42,37 @@ public class Shooter extends SubsystemBase {
         shooterLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         shooterLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        lastTime = System.currentTimeMillis();
+        lastPosition = shooterLeft.getCurrentPosition();
+        rpm = 0;
     }
+
+    public void setMotorPower(double power) {
+        shooterLeft.setPower(power);
+        shooterRight.setPower(power);
+    }
+
+    public void updateRPM() {
+        int currentPosition = shooterRight.getCurrentPosition();
+        double currentTime = System.currentTimeMillis();
+
+        double deltaTime = currentTime - lastTime;
+        int deltaPosition = currentPosition - lastPosition;
+
+        if(deltaTime >= DETLA_TIME) {
+            rpm = (deltaPosition * 60 * 1000) / (TICKS_PER_REVOLUTION * deltaTime);
+
+            lastPosition = currentPosition;
+            lastTime = currentTime;
+        }
+    }
+
+    public double getRPM(){
+        return rpm;
+    }
+
+
 
 //    private void updateDriver() {
 //

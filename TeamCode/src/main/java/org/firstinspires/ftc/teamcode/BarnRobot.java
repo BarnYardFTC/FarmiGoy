@@ -22,6 +22,7 @@ public class BarnRobot extends Robot {
     public Hood hood;
     public Intake intake;
     public LimeLight limelight;
+    public Shooter shooter;
 
 
     //Gamepads
@@ -61,11 +62,13 @@ public class BarnRobot extends Robot {
 
         gamepadEx1 = new GamepadEx(opMode.gamepad1);
 
+        initShooter();
         initGate();
         initIntake();
         initHood();
         initLimeLight();
         initDriveTrain();
+
     }
 
 
@@ -73,6 +76,10 @@ public class BarnRobot extends Robot {
 
     public void initGate(){
         gate = new Gate();
+    }
+
+    public void initShooter(){
+        shooter = new Shooter();
     }
 
     public void initIntake(){
