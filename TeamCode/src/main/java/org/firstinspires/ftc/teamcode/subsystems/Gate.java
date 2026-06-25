@@ -24,9 +24,7 @@ public class Gate extends SubsystemBase {
         leftServo = BarnRobot.getInstance().hardware.leftGateServo;
         rightServo.setDirection(Servo.Direction.FORWARD);
         leftServo.setDirection(Servo.Direction.REVERSE);
-        //call function to close gate
-
-
+        close();
     }
     private void setPosition(double pos){
 
