@@ -46,6 +46,9 @@ public class Hardware {
     public Servo leftGateServo;
     public Servo rightGateServo;
 
+    public Servo rightKickStand;
+    public Servo leftKickStand;
+
     public Servo hoodServo;
 
     public Limelight3A limeLight;
@@ -72,8 +75,10 @@ public class Hardware {
 
     private void initMotors() {
         intakeMotor = hwMap.get(DcMotorEx.class, INTAKE_CONFIG_NAME);
+
         shooterMotorLeft = hwMap.get(DcMotorEx.class, SHOOTER_LEFT_CONFIG_NAME);
         shooterMotorRight = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
+
         leftFrontDrivetrain = hwMap.get(DcMotor.class, LEFT_FRONT_DRIVETRAIN_CONFIG_NAME);
         rightFrontDrivetrain = hwMap.get(DcMotor.class, RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME);
         leftBackDrivetrain = hwMap.get(DcMotor.class, LEFT_BACK_DRIVETRAIN_CONFIG_NAME);
@@ -85,6 +90,9 @@ public class Hardware {
         rightGateServo = hwMap.get(Servo.class, RIGHT_GATE_CONFIG_NAME);
 
         hoodServo = hwMap.get(Servo.class, SHOOTER_HOOD_CONFIG_NAME);
+
+        rightKickStand = hwMap.get(Servo.class, RIGHT_KICKSTAND_CONFIG_NAME);
+        leftKickStand = hwMap.get(Servo.class, LEFT_KICKSTAND_CONFIG_NAME);
     }
 
     private void initSensors(){

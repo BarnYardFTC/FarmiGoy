@@ -16,8 +16,10 @@ public class BarnRobot extends Robot {
 
     //Subsystems
 
+    public Drivetrain drive;
     public Gate gate;
     public Hood hood;
+    public Intake intake;
     public LimeLight limelight;
 
 
@@ -58,11 +60,19 @@ public class BarnRobot extends Robot {
         gate = new Gate();
     }
 
+    public void initIntake(){
+        intake = new Intake();
+    }
+
     public void initHood() {
         hood = new Hood();
     }
     public void initLimeLight(){
         limelight = new LimeLight();
+    }
+
+    public void initDriveTrain(){
+        drive = new Drivetrain();
     }
 
 
