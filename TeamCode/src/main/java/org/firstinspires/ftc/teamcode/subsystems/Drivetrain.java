@@ -4,6 +4,7 @@ import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import org.firstinspires.ftc.teamcode.BarnRobot;
+import org.firstinspires.ftc.teamcode.commandGroups.CommandGroup;
 import org.firstinspires.ftc.teamcode.subsystems.components.MechanumDriveComponent;
 
 public class Drivetrain extends SubsystemBase {
@@ -26,5 +27,15 @@ public class Drivetrain extends SubsystemBase {
                 ),
                 this
         );
+    }
+
+    public Command driveNonFieldoCommand(){
+        return new RunCommand(
+                () -> mechanumDriveComponent.driveNonFieldCentric(
+                        BarnRobot.getInstance().gamepadEx1.getLeftX(),
+                        BarnRobot.getInstance().gamepadEx1.getLeftY(),
+                        BarnRobot.getInstance().gamepadEx1.getRightX()
+                )
+        , this);
     }
 }

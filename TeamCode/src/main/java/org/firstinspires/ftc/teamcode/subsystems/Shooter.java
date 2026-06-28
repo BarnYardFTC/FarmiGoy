@@ -20,8 +20,8 @@ public class Shooter extends SubsystemBase {
 
     private double kV = 0.000174, kS = 0.09, kP = 0.00145;
 
-    public static double DISTANCE_RANGE_1, DISTANCE_RANGE_2, DISTANCE_RANGE_3;
-    public static int RPM_RANGE_1, RPM_RANGE_2, RPM_RANGE_3, RPM_RANGE_4 = MAX_RPM;
+    public static double DISTANCE_RANGE_1 = 1, DISTANCE_RANGE_2 = 1.5, DISTANCE_RANGE_3 = 2;
+    public static int RPM_RANGE_1 = 1000, RPM_RANGE_2 = 1500, RPM_RANGE_3 = 2000, RPM_RANGE_4 = MAX_RPM;
 
     private DcMotorEx shooterLeft;
     private DcMotorEx shooterRight;
@@ -95,19 +95,25 @@ public class Shooter extends SubsystemBase {
         } else if (distance > DISTANCE_RANGE_3) {
             setMotorRPM(RPM_RANGE_4);
         }
+
+        updateRPM();
     }
 
     public RunCommand operateRangeOneCommand() {
-        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_1));
+        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_1), this);
     }
     public RunCommand operateRangeTwoCommand() {
-        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_2));
+        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_2), this);
     }
     public RunCommand operateRangeThreeCommand() {
-        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_3));
+        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_3), this);
     }
     public RunCommand operateRangeFourCommand() {
-        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_3 + 1));
+        return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_3 + 1), this);
+    }
+
+    public RunCommand turnOff() {
+        return new RunCommand(() -> setMotorPower(0), this);
     }
 
 }

@@ -8,12 +8,12 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
-public class Intake extends SubsystemBase {
+public class Transfer extends SubsystemBase {
     private DcMotor motor;
 
 
-    public Intake() {
-        motor = BarnRobot.getInstance().hardware.intakeMotor;
+    public Transfer() {
+        motor = BarnRobot.getInstance().hardware.transfer;
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -40,10 +40,10 @@ public class Intake extends SubsystemBase {
     }
 
     public Command disableCommand(){
-        return new InstantCommand(this::disable, this);
+        return new InstantCommand(this::disable);
     }
 
     public Command reversCommand() {
-        return new InstantCommand(this::reverse, this);
+        return new InstantCommand(this::reverse);
     }
 }

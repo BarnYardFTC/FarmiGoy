@@ -23,6 +23,8 @@ public class BarnRobot extends Robot {
     public Intake intake;
     public LimeLight limelight;
     public Shooter shooter;
+    public Transfer transfer;
+    public Kickstand kickstand;
 
 
     //Gamepads
@@ -68,6 +70,8 @@ public class BarnRobot extends Robot {
         initHood();
         initLimeLight();
         initDriveTrain();
+        initTransfer();
+        initKickstand();
 
     }
 
@@ -89,6 +93,7 @@ public class BarnRobot extends Robot {
     public void initHood() {
         hood = new Hood();
     }
+
     public void initLimeLight(){
         limelight = new LimeLight();
     }
@@ -96,6 +101,10 @@ public class BarnRobot extends Robot {
     public void initDriveTrain(){
         drive = new Drivetrain();
     }
+
+    public void initTransfer() { transfer = new Transfer(); }
+
+    public void initKickstand() { kickstand = new Kickstand(); }
 
 
     //Runs in a loop

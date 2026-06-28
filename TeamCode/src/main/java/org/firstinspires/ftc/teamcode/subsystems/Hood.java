@@ -24,13 +24,13 @@ public class Hood extends SubsystemBase {
 
     }
     private void lower(){
-        if(servo.getPosition()-0.1>MIN){
+        if(servo.getPosition()-0.1>=MIN){
             servo.setPosition(servo.getPosition()-0.1);
         }
     }
 
     private void raise(){
-        if(servo.getPosition()+0.1<MAX){
+        if(servo.getPosition()+0.1<=MAX){
             servo.setPosition(servo.getPosition()+0.1);
         }
     }

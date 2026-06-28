@@ -112,7 +112,7 @@ public class MechanumDriveComponent {
     }
 
     public void driveNonFieldCentric(double x, double y, double turn){
-        setSpeed(x,y,turn * speedModifier);
+        setSpeed(x,y,turn);
         translateSpeedToPower();
     }
 
@@ -129,4 +129,5 @@ public class MechanumDriveComponent {
         adjustSpeedForHeading(pinpoint.getIMUHeading());
         translateSpeedToPower();
     }
+
 }

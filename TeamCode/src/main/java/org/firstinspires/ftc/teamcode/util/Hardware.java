@@ -62,6 +62,8 @@ public class Hardware {
     public DcMotor leftBackDrivetrain;
     public DcMotor rightBackDrivetrain;
 
+    public DcMotor transfer;
+
 
     //Constructor
 
@@ -83,6 +85,8 @@ public class Hardware {
         rightFrontDrivetrain = hwMap.get(DcMotor.class, RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME);
         leftBackDrivetrain = hwMap.get(DcMotor.class, LEFT_BACK_DRIVETRAIN_CONFIG_NAME);
         rightBackDrivetrain = hwMap.get(DcMotor.class, RIGHT_BACK_DRIVETRAIN_CONFIG_NAME);
+
+        transfer = hwMap.get(DcMotor.class, TRANSFER_CONFIG_NAME);
     }
 
     private void initServos() {

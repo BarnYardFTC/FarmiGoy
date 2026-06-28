@@ -19,6 +19,8 @@ public class Kickstand extends SubsystemBase{
 
         rightServo.setDirection(Servo.Direction.REVERSE);
         leftServo.setDirection(Servo.Direction.FORWARD);
+
+        setPos(MIN);
     }
 
     private void setPos(double pos) {
@@ -27,10 +29,10 @@ public class Kickstand extends SubsystemBase{
     }
 
     public Command activateCommand() {
-        return new InstantCommand(() -> setPos(MAX));
+        return new InstantCommand(() -> setPos(MAX), this);
     }
 
     public Command deactivateCommand() {
-        return new InstantCommand(() -> setPos(MIN));
+        return new InstantCommand(() -> setPos(MIN), this);
     }
 }
