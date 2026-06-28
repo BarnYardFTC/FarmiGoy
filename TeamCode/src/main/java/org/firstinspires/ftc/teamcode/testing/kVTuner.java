@@ -12,7 +12,7 @@ public class kVTuner extends CommandOpMode {
 
     public static double kV = 0;
 
-    private double kS = 0;
+    private double kS = 0.1;
 
     public static int goalRPM = 3030;
     BarnRobot farmiGoy;

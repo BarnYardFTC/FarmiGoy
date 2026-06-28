@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase {
 
     private static final double DETLA_TIME = 100;
 
-    private double kV, kS, kP;
+    private double kV = 0.000174, kS = 0.09, kP = 0.00145;
 
     public static double DISTANCE_RANGE_1, DISTANCE_RANGE_2, DISTANCE_RANGE_3;
     public static int RPM_RANGE_1, RPM_RANGE_2, RPM_RANGE_3, RPM_RANGE_4 = MAX_RPM;
@@ -40,11 +40,11 @@ public class Shooter extends SubsystemBase {
 
         shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         shooterRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        shooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         shooterLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        shooterLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterLeft.setDirection(DcMotorSimple.Direction.REVERSE    );
+        shooterLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         lastTime = System.currentTimeMillis();
         lastPosition = shooterLeft.getCurrentPosition();
@@ -110,27 +110,4 @@ public class Shooter extends SubsystemBase {
         return new RunCommand(() -> operateBasedOnDistance(DISTANCE_RANGE_3 + 1));
     }
 
-//    private void updateDriver() {
-//
-//        double shooterRange = MAX_SHOOTER_VELOCITY - MIN_SHOOTER_VELOCITY;
-//
-//        targetShooterVelocity = MIN_SHOOTER_VELOCITY + ((shooterRange / (SHOOTER_VELOCITY_STAGES - 1)) * (currentShooterVelocityStage - 1));
-//
-//        if (shooterEnabled) {
-//            shooterLeft.setVelocity(targetShooterVelocity);
-//            shooterRight.setVelocity(targetShooterVelocity);
-//        } else {
-//            shooterLeft.setVelocity(0);
-//            shooterRight.setVelocity(0);
-//        }
-//    }
-
-    /*private void telemetryUpdate() {
-
-        telemetry.addData("Shooter Enabled", shooterEnabled);
-        telemetry.addLine("Shooter Velocity Stage: " + currentShooterVelocityStage + "/" + SHOOTER_VELOCITY_STAGES);
-        telemetry.addData("Target Shooter Velocity", targetShooterVelocity);
-
-        telemetry.update();
-    }*/
 }

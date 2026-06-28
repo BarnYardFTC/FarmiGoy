@@ -10,11 +10,11 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 @TeleOp(name = "Shooter kP Tuner", group = "tuning")
 public class kPTuner extends CommandOpMode {
 
-    public static double kV = 0;
+    public static double kV = 0.000175;
 
-    private double kP = 0.0;
+    public static double kP = 0.0;
 
-    private double kS = 0;
+    private double kS = 0.09;
 
     public static int goalRPM = 3030;
     BarnRobot farmiGoy;
