@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems.components;
 
+import com.pedropathing.ftc.localization.localizers.PinpointLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -21,6 +22,8 @@ public class MechanumDriveComponent {
     private static final double SLOW_SPEED = 0.3;
     private static final double FAST_SPEED = 1.0;
 
+    private PinpointLocalizer pinpoint;
+
     public MechanumDriveComponent(){
         this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
         this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
@@ -28,9 +31,25 @@ public class MechanumDriveComponent {
         this.rightBack = BarnRobot.getInstance().hardware.rightBackDrivetrain;
 
         initMotor(DcMotorSimple.Direction.REVERSE, leftFront);
-        initMotor(DcMotorSimple.Direction.REVERSE, rightFront);
+        initMotor(DcMotorSimple.Direction.FORWARD, rightFront);
         initMotor(DcMotorSimple.Direction.REVERSE, leftBack);
-        initMotor(DcMotorSimple.Direction.REVERSE, rightBack);
+        initMotor(DcMotorSimple.Direction.FORWARD, rightBack);
+
+        initData();
+    }
+
+    public MechanumDriveComponent(PinpointLocalizer localizer){
+        this.pinpoint = localizer;
+
+        this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
+        this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
+        this.leftBack = BarnRobot.getInstance().hardware.leftBackDrivetrain;
+        this.rightBack = BarnRobot.getInstance().hardware.rightBackDrivetrain;
+
+        initMotor(DcMotorSimple.Direction.REVERSE, leftFront);
+        initMotor(DcMotorSimple.Direction.FORWARD, rightFront);
+        initMotor(DcMotorSimple.Direction.REVERSE, leftBack);
+        initMotor(DcMotorSimple.Direction.FORWARD, rightBack);
 
         initData();
     }
@@ -94,6 +113,20 @@ public class MechanumDriveComponent {
 
     public void driveNonFieldCentric(double x, double y, double turn){
         setSpeed(x,y,turn * speedModifier);
+        translateSpeedToPower();
+    }
+
+    public void adjustSpeedForHeading(double heading) {
+        double adjustedX = spdX * Math.cos(heading) + spdY * Math.sin(heading);
+        double adjustedY = - spdX * Math.sin(heading) + spdY * Math.cos(heading);
+
+        spdX = adjustedX;
+        spdY = adjustedY;
+    }
+
+    public void driveFieldCentric(double x, double y, double turn){
+        setSpeed(x,y,turn * speedModifier);
+        adjustSpeedForHeading(pinpoint.getIMUHeading());
         translateSpeedToPower();
     }
 }
