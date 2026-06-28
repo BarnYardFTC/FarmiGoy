@@ -18,7 +18,7 @@ public class Shooter extends SubsystemBase {
 
     private static final double DETLA_TIME = 100;
 
-    private double kV = 0.000174, kS = 0.09, kP = 0.00145;
+    private double kV = 0.000176, kS = 0.09, kP = 0.00145;
 
     public static double DISTANCE_RANGE_1 = 1, DISTANCE_RANGE_2 = 1.5, DISTANCE_RANGE_3 = 2;
     public static int RPM_RANGE_1 = 1000, RPM_RANGE_2 = 1500, RPM_RANGE_3 = 2000, RPM_RANGE_4 = MAX_RPM;
