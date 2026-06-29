@@ -119,6 +119,10 @@ public class LimeLight extends SubsystemBase {
         return closePipeline;
     }
 
+    public void setAlianceCol(boolean alCol){
+        alianceCol = alCol;
+    }
+
     @Override
     public void periodic() {
         super.periodic();
@@ -127,7 +131,7 @@ public class LimeLight extends SubsystemBase {
         limelight.pipelineSwitch(choosePipeline());
     }
 
-    //i need bot heading to make ut work
+    //todo: Requires bot heading from pinpoint
 //    public Pose2D getBotPose(){
 //        if (llResult.getBotpose_MT2() != null){
 //            Pose2D currentPos = new Pose2D(llResult.getBotpose_MT2().getPosition().x / 0.0254 ,llResult.getBotpose_MT2().getPosition().y / 0.0254);

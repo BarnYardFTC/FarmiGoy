@@ -16,6 +16,8 @@ public class TestTeleOp extends CommandOpMode {
         farmigoy = BarnRobot.getInstance();
         farmigoy.init(this);
 
+        farmigoy.limelight.setAlianceCol(true);
+
         farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldoCommand());
 
         new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
