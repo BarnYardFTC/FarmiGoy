@@ -12,17 +12,16 @@ import java.util.function.ToDoubleBiFunction;
 
 @TeleOp(name = "Blue Teleop", group = "Teleops")
 public class RedTeleop extends CommandOpMode {
-
     private TeleopTemplate template;
-    private BarnRobot farminator = BarnRobot.getInstance();
+    private BarnRobot farminator;
 
     @Override
     public void initialize() {
-        // TODO: init staff related to OpModeData
-
         template = new TeleopTemplate();
         template.initControls();
 
+        farminator = BarnRobot.getInstance();
+        farminator.init(this);
     }
 
     @Override

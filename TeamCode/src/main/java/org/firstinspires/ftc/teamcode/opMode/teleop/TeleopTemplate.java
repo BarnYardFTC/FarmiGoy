@@ -7,8 +7,6 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.commandGroups.CommandGroup;
 
 public class TeleopTemplate {
-    // TODO: Shooter toggle button (Y button)
-    // TODO: KickStand toggle button (X button)
     // TODO: Reset pinpoint
 
     private BarnRobot farminator = BarnRobot.getInstance();
@@ -44,16 +42,6 @@ public class TeleopTemplate {
                         farminator.hood.raiseCommand()
                 );
 
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.DPAD_UP)
-                .whenPressed(
-                        farminator.gate.openCommand()
-                );
-
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.DPAD_DOWN)
-                .whenPressed(
-                        farminator.gate.closeCommand()
-                );
-
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
                 .whenActive(
                         () -> farminator.drive.mechanumDriveComponent.activateSlowMode()
@@ -62,6 +50,16 @@ public class TeleopTemplate {
                         () -> farminator.drive.mechanumDriveComponent.activateFastMode()
                 );
 
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.Y)
+                .toggleWhenPressed(
+                        farminator.shooter.operateRangeFourCommand(),
+                        farminator.shooter.turnOff()
+                );
 
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
+                .toggleWhenPressed(
+                        farminator.kickstand.activateCommand(),
+                        farminator.kickstand.deactivateCommand()
+                );
     }
 }
