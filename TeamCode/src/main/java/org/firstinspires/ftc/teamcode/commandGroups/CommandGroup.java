@@ -13,11 +13,11 @@ public class CommandGroup extends SequentialCommandGroup {
 
     public static Command shootCommand(){
         return new SequentialCommandGroup(
-                farminator.intake.activateCommand(),
+                activateIntakeTransferCommand(),
                 farminator.gate.openCommand(),
                 new WaitCommand(1500),
                 farminator.gate.closeCommand(),
-                farminator.intake.disableCommand()
+                disableIntakeTransferCommand()
         );
     }
 
