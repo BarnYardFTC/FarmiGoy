@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.opMode.teleop;
 
-import android.annotation.TargetApi;
-
+import com.seattlesolvers.solverslib.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.geometry.Rotation2d;
 import com.sun.tools.javac.comp.Todo;
-
 import org.firstinspires.ftc.teamcode.BarnRobot;
-
-import java.util.function.ToDoubleBiFunction;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @TeleOp(name = "Blue Teleop", group = "Teleops")
 public class BlueTeleop extends CommandOpMode {
     private TeleopTemplate template;
     private BarnRobot farminator;
+    private OpmodeData opmodeData;
 
     @Override
     public void initialize() {
@@ -22,6 +21,13 @@ public class BlueTeleop extends CommandOpMode {
 
         farminator = BarnRobot.getInstance();
         farminator.init(this);
+
+        opmodeData = new OpmodeData(
+                OpmodeData.AllianceColor.BLUE,
+                OpmodeData.OpModeType.TELEOP,
+                new Pose2d(0, 0, new Rotation2d(0)),
+                0
+                );
     }
 
     @Override
