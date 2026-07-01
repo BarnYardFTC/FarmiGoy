@@ -8,22 +8,22 @@ import org.firstinspires.ftc.teamcode.commandGroups.CommandGroup;
 
 public class TeleopTemplate {
     // TODO: Reset pinpoint
-
+    // TODO: use field centric once ready
     private BarnRobot farminator = BarnRobot.getInstance();
 
     public void initControls(){
 
-//        farminator.drive.setDefaultCommand(farminator.drive.driveCommand());
+        farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
 
         // =========== BINDS ===========
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
                 .whenActive(
-                        farminator.intake.activateCommand()
+                        CommandGroup.enableIntakeTransferCommand()
                 )
 
                 .whenInactive(
-                        farminator.intake.disableCommand()
+                        CommandGroup.disableIntakeTransferCommand()
                 );
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.05)
@@ -31,6 +31,10 @@ public class TeleopTemplate {
                         CommandGroup.shootCommand()
                 );
 
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.DPAD_UP)
+                .whenActive(
+                        CommandGroup.shootCommand()
+                );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
                 .whenPressed(
@@ -43,10 +47,8 @@ public class TeleopTemplate {
                 );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
-                .whenActive(
-                        () -> farminator.drive.mechanumDriveComponent.activateSlowMode()
-                )
-                .whenInactive(
+                .toggleWhenActive(
+                        () -> farminator.drive.mechanumDriveComponent.activateSlowMode(),
                         () -> farminator.drive.mechanumDriveComponent.activateFastMode()
                 );
 

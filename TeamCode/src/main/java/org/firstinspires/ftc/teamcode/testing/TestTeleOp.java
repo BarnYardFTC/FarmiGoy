@@ -22,7 +22,7 @@ public class TestTeleOp extends CommandOpMode {
 
         new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
                 .whenActive(
-                        CommandGroup.activateIntakeTransferCommand()
+                        CommandGroup.enableIntakeTransferCommand()
                 )
 
                 .whenInactive(

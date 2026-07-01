@@ -10,18 +10,18 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 
 import java.util.function.ToDoubleBiFunction;
 
-@TeleOp(name = "Blue Teleop", group = "Teleops")
+@TeleOp(name = "Red Teleop", group = "Teleops")
 public class RedTeleop extends CommandOpMode {
     private TeleopTemplate template;
     private BarnRobot farminator;
 
     @Override
     public void initialize() {
-        template = new TeleopTemplate();
-        template.initControls();
-
         farminator = BarnRobot.getInstance();
         farminator.init(this);
+
+        template = new TeleopTemplate();
+        template.initControls();
     }
 
     @Override

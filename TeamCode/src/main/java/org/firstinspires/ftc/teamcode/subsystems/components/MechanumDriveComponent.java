@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class MechanumDriveComponent {
-
-
     private final DcMotor leftFront;
     private final DcMotor rightFront;
     private final DcMotor leftBack;
@@ -19,28 +17,10 @@ public class MechanumDriveComponent {
     private double spdTurn;
     private double speedModifier;
 
-    private static final double SLOW_SPEED = 0.3;
+    private static final double SLOW_SPEED = 0.5;
     private static final double FAST_SPEED = 1.0;
 
-    private PinpointLocalizer pinpoint;
-
     public MechanumDriveComponent(){
-        this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
-        this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
-        this.leftBack = BarnRobot.getInstance().hardware.leftBackDrivetrain;
-        this.rightBack = BarnRobot.getInstance().hardware.rightBackDrivetrain;
-
-        initMotor(DcMotorSimple.Direction.REVERSE, leftFront);
-        initMotor(DcMotorSimple.Direction.FORWARD, rightFront);
-        initMotor(DcMotorSimple.Direction.REVERSE, leftBack);
-        initMotor(DcMotorSimple.Direction.FORWARD, rightBack);
-
-        initData();
-    }
-
-    public MechanumDriveComponent(PinpointLocalizer localizer){
-        this.pinpoint = localizer;
-
         this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
         this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
         this.leftBack = BarnRobot.getInstance().hardware.leftBackDrivetrain;
@@ -124,10 +104,9 @@ public class MechanumDriveComponent {
         spdY = adjustedY;
     }
 
-    public void driveFieldCentric(double x, double y, double turn){
-        setSpeed(x,y,turn * speedModifier);
-        adjustSpeedForHeading(pinpoint.getIMUHeading());
-        translateSpeedToPower();
-    }
-
+//    public void driveFieldCentric(double x, double y, double turn){
+//        setSpeed(x,y,turn * speedModifier);
+//        adjustSpeedForHeading();
+//        translateSpeedToPower();
+//    }
 }

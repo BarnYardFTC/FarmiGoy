@@ -17,11 +17,11 @@ public class BlueTeleop extends CommandOpMode {
 
     @Override
     public void initialize() {
-        template = new TeleopTemplate();
-        template.initControls();
-
         farminator = BarnRobot.getInstance();
         farminator.init(this);
+
+        template = new TeleopTemplate();
+        template.initControls();
     }
 
     @Override

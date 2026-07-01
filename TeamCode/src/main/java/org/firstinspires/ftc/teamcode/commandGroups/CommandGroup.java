@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.commandGroups;
 
 import com.seattlesolvers.solverslib.command.Command;
-import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.ParallelCommandGroup;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.WaitCommand;
@@ -13,7 +12,7 @@ public class CommandGroup extends SequentialCommandGroup {
 
     public static Command shootCommand(){
         return new SequentialCommandGroup(
-                activateIntakeTransferCommand(),
+                enableIntakeTransferCommand(),
                 farminator.gate.openCommand(),
                 new WaitCommand(1500),
                 farminator.gate.closeCommand(),
@@ -21,7 +20,7 @@ public class CommandGroup extends SequentialCommandGroup {
         );
     }
 
-    public static Command activateIntakeTransferCommand() {
+    public static Command enableIntakeTransferCommand() {
         return new ParallelCommandGroup(
                 farminator.intake.activateCommand(),
                 farminator.transfer.activateCommand()
