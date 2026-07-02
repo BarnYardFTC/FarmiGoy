@@ -21,11 +21,11 @@ public class RedTeleop extends CommandOpMode {
 
     @Override
     public void initialize() {
-        template = new TeleopTemplate();
-        template.initControls();
-
         farminator = BarnRobot.getInstance();
         farminator.init(this);
+
+        template = new TeleopTemplate();
+        template.initControls();
 
         opmodeData = new OpmodeData(
                 OpmodeData.AllianceColor.RED,

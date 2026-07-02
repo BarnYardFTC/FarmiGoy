@@ -19,10 +19,10 @@ public class Hardware {
     private static final String LEFT_BACK_TRANSFER_CONFIG_NAME = "leftBackTransfer";
     private static final String RIGHT_BACK_TRANSFER_CONFIG_NAME = "rightBackTransfer";
 
-    private static final String LEFT_FRONT_DRIVETRAIN_CONFIG_NAME = "leftFrontDrivetrain";
-    private static final String RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME = "rightFrontDrivetrain";
-    private static final String LEFT_BACK_DRIVETRAIN_CONFIG_NAME = "leftBackDrivetrain";
-    private static final String RIGHT_BACK_DRIVETRAIN_CONFIG_NAME = "rightBackDrivetrain";
+    public static final String LEFT_FRONT_DRIVETRAIN_CONFIG_NAME = "leftFrontDrivetrain";
+    public static final String RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME = "rightFrontDrivetrain";
+    public static final String LEFT_BACK_DRIVETRAIN_CONFIG_NAME = "leftBackDrivetrain";
+    public static final String RIGHT_BACK_DRIVETRAIN_CONFIG_NAME = "rightBackDrivetrain";
 
     private static final String RIGHT_KICKSTAND_CONFIG_NAME = "kickStandRight";
     private static final String LEFT_KICKSTAND_CONFIG_NAME = "kickStandLeft";
