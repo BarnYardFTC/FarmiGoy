@@ -20,8 +20,8 @@ public class TestAuto extends CommandOpMode {
     Follower follower;
     private Path path;
     private boolean shootScheduled = false;
-    private final Pose START_POSE = new Pose(76.45182138660401, 94.36251468860164, 36);
-    private final Pose END_POSE = new Pose(94.90834312573445, 117.80728554641597, 24);
+    private final Pose START_POSE = new Pose(76.45182138660401, 94.36251468860164, Math.toRadians(36));
+    private final Pose END_POSE = new Pose(94.90834312573445, 117.80728554641597, Math.toRadians(24));
 
     private final OpmodeData opmodeData = new OpmodeData(
             OpmodeData.AllianceColor.RED,
@@ -37,6 +37,7 @@ public class TestAuto extends CommandOpMode {
 
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(START_POSE);
+        farminator.pinpoint.setPosition(START_POSE);
         path = new Path(new BezierLine(START_POSE, END_POSE));
 
         waitForStart();
@@ -51,7 +52,7 @@ public class TestAuto extends CommandOpMode {
         follower.update();
 
         if (!follower.isBusy() && !shootScheduled) {
-            CommandGroup.shootCommand();
+            schedule(CommandGroup.shootCommand());
             shootScheduled = true;
         }
     }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.util;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -40,6 +41,9 @@ public class Hardware {
 
     private static final String TRANSFER_CONFIG_NAME = "transfer";
 
+    private static final String PINPOINT_CONFIG_NAME = "pinpoint";
+    private static final String LIMELIGHT_CONFIG_NAME = "limelight";
+
 
     //Hardware objects
 
@@ -52,6 +56,7 @@ public class Hardware {
     public Servo hoodServo;
 
     public Limelight3A limeLight;
+    public GoBildaPinpointDriver pinpoint;
 
     public DcMotorEx shooterMotorLeft;
     public DcMotorEx shooterMotorRight;
@@ -100,6 +105,7 @@ public class Hardware {
     }
 
     private void initSensors(){
-        limeLight = hwMap.get(Limelight3A.class, "limelight");
+        limeLight = hwMap.get(Limelight3A.class, LIMELIGHT_CONFIG_NAME);
+        pinpoint = hwMap.get(GoBildaPinpointDriver.class, PINPOINT_CONFIG_NAME);
     }
 }

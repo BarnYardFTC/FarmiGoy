@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.seattlesolvers.solverslib.command.Robot;
@@ -22,6 +23,7 @@ public class BarnRobot extends Robot {
     public Hood hood;
     public Intake intake;
     public LimeLight limelight;
+    public Pinpoint pinpoint;
     public Shooter shooter;
     public Transfer transfer;
     public Kickstand kickstand;
@@ -69,6 +71,7 @@ public class BarnRobot extends Robot {
         initIntake();
         initHood();
         initLimeLight();
+        initPinpoint();
         initDriveTrain();
         initTransfer();
         initKickstand();
@@ -96,6 +99,10 @@ public class BarnRobot extends Robot {
 
     public void initLimeLight(){
         limelight = new LimeLight();
+    }
+
+    public void initPinpoint() {
+        pinpoint = new Pinpoint();
     }
 
     public void initDriveTrain(){
