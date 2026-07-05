@@ -36,14 +36,14 @@ public class Transfer extends SubsystemBase {
     }
 
     public Command activateCommand(){
-        return new InstantCommand(this::activate);
+        return new InstantCommand(this::activate, this);
     }
 
     public Command disableCommand(){
-        return new InstantCommand(this::disable);
+        return new InstantCommand(this::disable, this);
     }
 
     public Command reversCommand() {
-        return new InstantCommand(this::reverse);
+        return new InstantCommand(this::reverse, this);
     }
 }

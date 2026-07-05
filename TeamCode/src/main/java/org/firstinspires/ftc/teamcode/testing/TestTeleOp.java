@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.button.Trigger;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.commandGroups.CommandGroup;
 
 @TeleOp
+@Disabled
 public class TestTeleOp extends CommandOpMode {
     BarnRobot farmigoy;
     @Override
@@ -20,14 +22,14 @@ public class TestTeleOp extends CommandOpMode {
 
         farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldoCommand());
 
-        new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
-                .whenActive(
-                        CommandGroup.enableIntakeTransferCommand()
-                )
-
-                .whenInactive(
-                        CommandGroup.disableIntakeTransferCommand()
-                );
+//        new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
+//                .whenActive(
+//                        CommandGroup.enableIntakeTransferCommand()
+//                )
+//
+//                .whenInactive(
+//                        CommandGroup.disableIntakeTransferCommand()
+//                );
 
         //TODO: ADD IN FUTURE SHOOT COMMAND
 //        new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.05)

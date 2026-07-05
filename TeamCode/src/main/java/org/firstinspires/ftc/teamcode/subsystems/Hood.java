@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 
 @Configurable
 public class Hood extends SubsystemBase {
-    public static double DEFAULT_POS = 0.85;
+    public static double DEFAULT_POS = 0.8;
     private Servo servo;
 
 

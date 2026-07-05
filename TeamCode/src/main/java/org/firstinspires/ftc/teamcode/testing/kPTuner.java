@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.testing;
 
 import com.bylazar.configurables.annotations.Configurable;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
 @Configurable
+@Disabled
 @TeleOp(name = "Shooter kP Tuner", group = "tuning")
 public class kPTuner extends CommandOpMode {
 

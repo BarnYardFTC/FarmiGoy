@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import com.seattlesolvers.solverslib.geometry.Pose2d;
 import com.seattlesolvers.solverslib.geometry.Rotation2d;
 import com.sun.tools.javac.comp.Todo;
@@ -39,7 +40,18 @@ public class RedTeleop extends CommandOpMode {
     public void run() {
         super.run();
 
-        telemetry.addLine("Red telemetry works");
+        telemetry.addData("RT", farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER));
+        telemetry.addData("LT", farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER));
+
+        telemetry.addData("DPad Up", farminator.gamepadEx1.getButton(GamepadKeys.Button.DPAD_UP));
+        telemetry.addData("B", farminator.gamepadEx1.getButton(GamepadKeys.Button.B));
+        telemetry.addData("Y", farminator.gamepadEx1.getButton(GamepadKeys.Button.Y));
+
+        // Uncomment if you use these later
+        // telemetry.addData("X", farminator.gamepadEx1.getButton(GamepadKeys.Button.X));
+        // telemetry.addData("LB", farminator.gamepadEx1.getButton(GamepadKeys.Button.LEFT_BUMPER));
+        // telemetry.addData("RB", farminator.gamepadEx1.getButton(GamepadKeys.Button.RIGHT_BUMPER));
+
 
         farminator.periodic();
     }

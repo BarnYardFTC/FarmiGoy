@@ -14,16 +14,18 @@ public class TeleopTemplate {
     public void initControls(){
 
         farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
+        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
 
         // =========== BINDS ===========
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
                 .whenActive(
-                        CommandGroup.enableIntakeTransferCommand()
+                        farminator.transfer.activateCommand()
                 )
 
                 .whenInactive(
-                        CommandGroup.disableIntakeTransferCommand()
+                        farminator.transfer.disableCommand()
                 );
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.05)
@@ -35,16 +37,16 @@ public class TeleopTemplate {
                 .whenActive(
                         CommandGroup.shootCommand()
                 );
-
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
-                .whenPressed(
-                        farminator.hood.lowerCommand()
-                );
-
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
-                .whenPressed(
-                        farminator.hood.raiseCommand()
-                );
+//
+//        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
+//                .whenPressed(
+//                        farminator.hood.lowerCommand()
+//                );
+//
+//        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
+//                .whenPressed(
+//                        farminator.hood.raiseCommand()
+//                );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
                 .toggleWhenActive(
@@ -54,14 +56,14 @@ public class TeleopTemplate {
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.Y)
                 .toggleWhenPressed(
-                        farminator.shooter.operateRangeThreeCommand(),
-                        farminator.shooter.turnOff()
+                        farminator.shooter.turnOff(),
+                        farminator.shooter.operateRangeThreeCommand()
                 );
 
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
-                .toggleWhenPressed(
-                        farminator.kickstand.activateCommand(),
-                        farminator.kickstand.deactivateCommand()
-                );
+//        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
+//                .toggleWhenPressed(
+//                        farminator.kickstand.activateCommand(),
+//                        farminator.kickstand.deactivateCommand()
+//                );
     }
 }
