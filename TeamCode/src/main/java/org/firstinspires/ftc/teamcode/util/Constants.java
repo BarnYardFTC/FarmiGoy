@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import com.pedropathing.control.FilteredPIDFCoefficients;
 import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
@@ -14,20 +15,23 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
-public class Constants {
+public class
+Constants {
 
-    // TODO: decide whether we need secondary PIDF controllers
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(14.07)
             .forwardZeroPowerAcceleration(-25.76395763804099)
             .lateralZeroPowerAcceleration(-87.59485280046445)
-            .useSecondaryTranslationalPIDF(true) // shitty without it
-            .useSecondaryHeadingPIDF(false) // no need
-            .useSecondaryDrivePIDF(false) // might use
-            .translationalPIDFCoefficients(new PIDFCoefficients(0.12, 0.9, 0, 0.7))
-            .secondaryTranslationalPIDFCoefficients(new PIDFCoefficients(0.1, 0.04, 0, 0.2))
-            .headingPIDFCoefficients(new PIDFCoefficients(0.2, 0.5, 0, 0.07));
-    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
+            .useSecondaryTranslationalPIDF(true)
+            .useSecondaryHeadingPIDF(true)
+            .useSecondaryDrivePIDF(true)
+            .translationalPIDFCoefficients(new PIDFCoefficients(0.3, 0, 0.02, 0.04))
+            .secondaryTranslationalPIDFCoefficients(new PIDFCoefficients(0.3, 0.01, 0.01, 0.015))
+            .headingPIDFCoefficients(new PIDFCoefficients(0.15, 0, 0.015, 0.5))
+            .secondaryHeadingPIDFCoefficients(new PIDFCoefficients(5, 0, 0.05, 0.01))
+            .drivePIDFCoefficients(new FilteredPIDFCoefficients(0.035, 0, 0.00008, 0.008, 0.6))
+            .secondaryDrivePIDFCoefficients(new FilteredPIDFCoefficients(0.02, 0, 0.000005, 0.01, 0.6));;
+    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1.2, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
