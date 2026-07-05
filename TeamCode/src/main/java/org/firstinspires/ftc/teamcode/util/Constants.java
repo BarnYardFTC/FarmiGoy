@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
@@ -15,15 +16,17 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class Constants {
 
-    // TODO: tune PIDF
+    // TODO: decide whether we need secondary PIDF controllers
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(14.07)
             .forwardZeroPowerAcceleration(-25.76395763804099)
             .lateralZeroPowerAcceleration(-87.59485280046445)
-            .useSecondaryTranslationalPIDF(true)
-            .useSecondaryHeadingPIDF(true)
-            .useSecondaryDrivePIDF(true);
-
+            .useSecondaryTranslationalPIDF(true) // shitty without it
+            .useSecondaryHeadingPIDF(false) // no need
+            .useSecondaryDrivePIDF(false) // might use
+            .translationalPIDFCoefficients(new PIDFCoefficients(0.12, 0.9, 0, 0.7))
+            .secondaryTranslationalPIDFCoefficients(new PIDFCoefficients(0.1, 0.04, 0, 0.2))
+            .headingPIDFCoefficients(new PIDFCoefficients(0.2, 0.5, 0, 0.07));
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {
