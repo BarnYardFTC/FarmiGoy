@@ -40,19 +40,6 @@ public class RedTeleop extends CommandOpMode {
     public void run() {
         super.run();
 
-        telemetry.addData("RT", farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER));
-        telemetry.addData("LT", farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER));
-
-        telemetry.addData("DPad Up", farminator.gamepadEx1.getButton(GamepadKeys.Button.DPAD_UP));
-        telemetry.addData("B", farminator.gamepadEx1.getButton(GamepadKeys.Button.B));
-        telemetry.addData("Y", farminator.gamepadEx1.getButton(GamepadKeys.Button.Y));
-
-        // Uncomment if you use these later
-        // telemetry.addData("X", farminator.gamepadEx1.getButton(GamepadKeys.Button.X));
-        // telemetry.addData("LB", farminator.gamepadEx1.getButton(GamepadKeys.Button.LEFT_BUMPER));
-        // telemetry.addData("RB", farminator.gamepadEx1.getButton(GamepadKeys.Button.RIGHT_BUMPER));
-
-
         farminator.periodic();
     }
 }

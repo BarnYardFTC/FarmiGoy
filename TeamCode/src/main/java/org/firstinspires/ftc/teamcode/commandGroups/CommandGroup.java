@@ -10,14 +10,17 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class CommandGroup extends SequentialCommandGroup {
     static BarnRobot farminator = BarnRobot.getInstance();
+    public static boolean isShooting = false;
 
     public static Command shootCommand(){
         return new SequentialCommandGroup(
+                new InstantCommand(() -> isShooting = true),
                 farminator.transfer.activateCommand(),
                 farminator.gate.openCommand(),
                 new WaitCommand(1500),
                 farminator.gate.closeCommand(),
-                farminator.transfer.disableCommand()
+                farminator.transfer.disableCommand(),
+                new InstantCommand(() -> isShooting = false)
                 );
     }
 
