@@ -55,7 +55,7 @@ public class BarnRobot extends Robot {
     }
 
 
-    //TODO: init
+    //farminator initialization
 
     public void init(OpMode opMode){
 
@@ -76,7 +76,7 @@ public class BarnRobot extends Robot {
     }
 
 
-    //Subsystems initialisation
+    //Subsystems initialization
 
     public void initGate(){
         gate = new Gate();
