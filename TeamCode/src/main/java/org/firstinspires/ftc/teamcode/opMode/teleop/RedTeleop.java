@@ -39,7 +39,6 @@ public class RedTeleop extends CommandOpMode {
     @Override
     public void run() {
         super.run();
-
         farminator.periodic();
     }
 }

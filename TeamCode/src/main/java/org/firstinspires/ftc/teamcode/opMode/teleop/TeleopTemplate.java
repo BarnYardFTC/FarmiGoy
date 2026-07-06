@@ -36,16 +36,16 @@ public class TeleopTemplate {
                 .whenActive(
                         CommandGroup.shootCommand()
                 );
-//
-//        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
-//                .whenPressed(
-//                        farminator.hood.lowerCommand()
-//                );
-//
-//        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
-//                .whenPressed(
-//                        farminator.hood.raiseCommand()
-//                );
+
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
+                .whenPressed(
+                        farminator.hood.lowerCommand()
+                );
+
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER)
+                .whenPressed(
+                        farminator.hood.raiseCommand()
+                );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
                 .toggleWhenActive(
