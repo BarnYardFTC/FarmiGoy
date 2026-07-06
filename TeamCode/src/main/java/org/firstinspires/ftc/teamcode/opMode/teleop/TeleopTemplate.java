@@ -19,7 +19,7 @@ public class TeleopTemplate {
 
         // =========== BINDS ===========
 
-        new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05 && !CommandGroup.isShooting)
+        new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.5 && !CommandGroup.isShooting)
                 .whenActive(
                         farminator.transfer.activateCommand()
                 )
@@ -27,7 +27,7 @@ public class TeleopTemplate {
                         farminator.transfer.disableCommand()
                 );
 
-        new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.05)
+        new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.5)
                 .whenActive(
                         CommandGroup.shootCommand()
                 );
