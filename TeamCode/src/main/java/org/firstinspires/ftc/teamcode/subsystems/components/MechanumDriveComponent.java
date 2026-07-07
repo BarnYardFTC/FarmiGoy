@@ -113,9 +113,9 @@ public class MechanumDriveComponent {
         spdY = adjustedY;
     }
 
-//    public void driveFieldCentric(double x, double y, double turn){
-//        setSpeed(x,y,turn * speedModifier);
-//        adjustSpeedForHeading();
-//        translateSpeedToPower();
-//    }
+    public void driveFieldCentric(double x, double y, double turn, double heading){
+        setSpeed(x,y,turn * speedModifier);
+        adjustSpeedForHeading(heading);
+        translateSpeedToPower();
+    }
 }

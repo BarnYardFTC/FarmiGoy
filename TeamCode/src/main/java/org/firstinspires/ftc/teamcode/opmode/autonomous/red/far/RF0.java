@@ -7,8 +7,8 @@ import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 import org.firstinspires.ftc.teamcode.BarnRobot;
-import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
-import org.firstinspires.ftc.teamcode.opmode.autonomous.red.far.RFTemplate.*;
+import org.firstinspires.ftc.teamcode.util.CommandGroup;
+
 import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.far.RFTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
 

@@ -9,7 +9,7 @@ import com.seattlesolvers.solverslib.command.WaitCommand;
 import com.seattlesolvers.solverslib.command.WaitUntilCommand;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 import org.firstinspires.ftc.teamcode.BarnRobot;
-import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
+import org.firstinspires.ftc.teamcode.util.CommandGroup;
 
 import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
@@ -48,7 +48,7 @@ public class RC3 extends CommandOpMode{
                 CommandGroup.disableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goShootClose),
                 CommandGroup.shootCommand(),
-                farminator.shooter.turnOffInstant(),
+                //farminator.shooter.turnOffInstant(),
                 new FollowPathCommand(follower, goLeave)
         );
     }

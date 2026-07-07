@@ -14,7 +14,7 @@ import com.seattlesolvers.solverslib.pedroCommand.TurnToCommand;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.BarnRobot;
-import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
+import org.firstinspires.ftc.teamcode.util.CommandGroup;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
 @Autonomous(name="TestAuto", group="test")

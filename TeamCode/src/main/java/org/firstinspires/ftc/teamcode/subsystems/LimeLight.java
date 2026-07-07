@@ -56,7 +56,7 @@ public class LimeLight extends SubsystemBase {
     public boolean isGoalDetected(){
         if (isDataValid()){
             for (LLResultTypes.FiducialResult fr : frs){
-                if ((fr.getFiducialId() == 20 && !alianceCol) || (fr.getFiducialId() == 21 && alianceCol)){
+                if ((fr.getFiducialId() == 20 && !alianceCol) || (fr.getFiducialId() == 24 && alianceCol)){
                     return true;
                 }
             }
@@ -140,6 +140,8 @@ public class LimeLight extends SubsystemBase {
 
     public void displayTelemetry(Telemetry telemetry){
         telemetry.addData("Current pipeline: ", choosePipeline());
+        telemetry.addData("Data valid: ", isDataValid());
+
 
         if(isGoalDetected()){
             telemetry.addData("Limelight distance: ", getGoalDistance());

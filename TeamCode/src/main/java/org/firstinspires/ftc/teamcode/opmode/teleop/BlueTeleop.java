@@ -20,13 +20,15 @@ public class BlueTeleop extends CommandOpMode {
         farminator.init(this);
 
         template = new TeleopTemplate();
-        template.initControls();
+        template.initControls(false);
 
         opmodeData = new OpmodeData(
                 OpmodeData.AllianceColor.BLUE,
                 OpmodeData.OpModeType.TELEOP,
                 new Pose2d(0, 0, new Rotation2d(0)),
                 0);
+
+        farminator.limelight.setAlianceCol(true);
     }
 
     @Override
@@ -34,6 +36,7 @@ public class BlueTeleop extends CommandOpMode {
         super.run();
 
         telemetry.addLine("Blue telemetry works");
+        farminator.limelight.displayTelemetry(telemetry);
 
         farminator.periodic();
     }

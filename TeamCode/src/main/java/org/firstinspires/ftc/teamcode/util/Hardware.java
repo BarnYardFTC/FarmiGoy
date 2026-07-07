@@ -87,13 +87,23 @@ public class Hardware {
         shooterMotorRight = hwMap.get(DcMotorEx.class, SHOOTER_RIGHT_CONFIG_NAME);
 
         leftFrontDrivetrain = hwMap.get(DcMotor.class, LEFT_FRONT_DRIVETRAIN_CONFIG_NAME);
+        leftFrontDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontDrivetrain = hwMap.get(DcMotor.class, RIGHT_FRONT_DRIVETRAIN_CONFIG_NAME);
+        rightFrontDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBackDrivetrain = hwMap.get(DcMotor.class, LEFT_BACK_DRIVETRAIN_CONFIG_NAME);
+        leftBackDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBackDrivetrain = hwMap.get(DcMotor.class, RIGHT_BACK_DRIVETRAIN_CONFIG_NAME);
+        rightBackDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         transfer = hwMap.get(DcMotor.class, TRANSFER_CONFIG_NAME);
     }
 
+    public void setBrake() {
+        leftFrontDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBackDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBackDrivetrain.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
     private void initServos() {
         leftGateServo = hwMap.get(Servo.class, LEFT_GATE_CONFIG_NAME);
         rightGateServo = hwMap.get(Servo.class, RIGHT_GATE_CONFIG_NAME);

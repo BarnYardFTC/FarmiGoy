@@ -5,18 +5,20 @@ import com.seattlesolvers.solverslib.command.button.Trigger;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
-import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
+import org.firstinspires.ftc.teamcode.util.CommandGroup;
 
 public class TeleopTemplate {
     // TODO: Reset pinpoint
     // TODO: use field centric once ready
     private BarnRobot farminator = BarnRobot.getInstance();
 
-    public void initControls(){
+    public void initControls(boolean isPedro){
 
-        farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
+        if (!isPedro) {
+            farminator.drive.setDefaultCommand(farminator.drive.driveCommand());
+        }
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
-        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
+//        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
         farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
 
         // =========== BINDS ===========
@@ -59,11 +61,19 @@ public class TeleopTemplate {
                         farminator.hood.raiseCommand()
                 );
 
-        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
-                .toggleWhenActive(
-                        () -> farminator.drive.mechanumDriveComponent.activateSlowMode(),
-                        () -> farminator.drive.mechanumDriveComponent.activateFastMode()
-                );
+        if (!isPedro) {
+            farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
+                    .toggleWhenActive(
+                            () -> farminator.drive.mechanumDriveComponent.activateSlowMode(),
+                            () -> farminator.drive.mechanumDriveComponent.activateFastMode()
+                    );
+        }
+        else {
+            farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
+                    .whenActive(
+                            () -> farminator.pinpoint.reset()
+                    );
+        }
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.Y)
                 .toggleWhenPressed(

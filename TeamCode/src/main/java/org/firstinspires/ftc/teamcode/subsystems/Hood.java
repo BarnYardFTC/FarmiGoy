@@ -21,6 +21,8 @@ public class Hood extends SubsystemBase {
 
 
     public Hood(){
+        initInterpLUT();
+
         servo = BarnRobot.getInstance().hardware.hoodServo;
         servo.setDirection(Servo.Direction.REVERSE);
         servo.setPosition(DEFAULT_POS);
@@ -53,6 +55,10 @@ public class Hood extends SubsystemBase {
     }
 
     public void hoodPositionDependsDistance(double distance) {
+        if (distance < 0.03) {
+            distance = 0.1;
+        }
+
         double position = interpLUT.get(distance);
 
         servo.setPosition(position);

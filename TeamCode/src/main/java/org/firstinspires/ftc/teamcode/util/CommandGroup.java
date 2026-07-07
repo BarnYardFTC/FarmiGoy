@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.commandgroups;
+package org.firstinspires.ftc.teamcode.util;
 
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
@@ -19,10 +19,6 @@ public class CommandGroup extends SequentialCommandGroup {
                 new InstantCommand(() -> isShooting = true),
                 farminator.transfer.activateCommand(),
                 farminator.intake.activateCommand(),
-                new ParallelRaceGroup(
-                        new WaitUntilCommand(() -> farminator.shooter.isReady()), // If doesn't shoot it's this shit
-                        new WaitCommand(5000)
-                ),
                 farminator.gate.openCommand(),
                 new WaitCommand(1500),
                 farminator.gate.closeCommand(),

@@ -20,7 +20,7 @@ public class RedTeleop extends CommandOpMode {
         farminator.init(this);
 
         template = new TeleopTemplate();
-        template.initControls();
+        template.initControls(false);
 
         opmodeData = new OpmodeData(
                 OpmodeData.AllianceColor.RED,

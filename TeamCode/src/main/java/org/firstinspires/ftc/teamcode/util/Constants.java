@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.util;
 
 import com.pedropathing.control.FilteredPIDFCoefficients;
 import com.pedropathing.control.PIDFCoefficients;
+import com.pedropathing.control.PredictiveBrakingCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
@@ -30,7 +31,8 @@ Constants {
             .headingPIDFCoefficients(new PIDFCoefficients(0.15, 0, 0.015, 0.5))
             .secondaryHeadingPIDFCoefficients(new PIDFCoefficients(5, 0, 0.05, 0.01))
             .drivePIDFCoefficients(new FilteredPIDFCoefficients(0.035, 0, 0.00008, 0.008, 0.6))
-            .secondaryDrivePIDFCoefficients(new FilteredPIDFCoefficients(0.02, 0, 0.000005, 0.01, 0.6));;
+            .secondaryDrivePIDFCoefficients(new FilteredPIDFCoefficients(0.02, 0, 0.000005, 0.01, 0.6))
+            .predictiveBrakingCoefficients(new PredictiveBrakingCoefficients(0.3, 0.057999299877891146, 0.0025011065684205627));
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {

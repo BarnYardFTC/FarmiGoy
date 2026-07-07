@@ -117,5 +117,6 @@ public class BarnRobot extends Robot {
     //Runs in a loop
     public void periodic() {
         telemetry.update();
+        pinpoint.update();
     }
 }
