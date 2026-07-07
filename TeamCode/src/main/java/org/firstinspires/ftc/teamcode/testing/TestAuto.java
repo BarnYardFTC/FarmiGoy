@@ -10,6 +10,9 @@ import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 import com.seattlesolvers.solverslib.pedroCommand.TurnToCommand;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
 import org.firstinspires.ftc.teamcode.util.Constants;
@@ -26,7 +29,7 @@ public class TestAuto extends CommandOpMode {
     /** Pedro's Pose class objects store position.
      * To understand the coordinate system visit Pedro's manual coordinate page.  */
     private final Pose START_POSE = new Pose(72, 72, Math.toRadians(90));
-    private final Pose SECOND_POSE = new Pose(96, 72, Math.toRadians(90));
+    private final Pose SECOND_POSE = new Pose(72, 96, Math.toRadians(90));
     private final Pose END_POSE = new Pose(96, 96, Math.toRadians(180));
 
 
@@ -41,6 +44,7 @@ public class TestAuto extends CommandOpMode {
         follower = Constants.createFollower(hardwareMap);
         buildPaths();
         follower.setStartingPose(START_POSE);
+        //farminator.pinpoint.setPosition(START_POSE);
 
         schedule(autoRoutine()); // Wrapping in schedule() is necessary
         // DO NOT CHANGE THE ORDER !!
@@ -51,6 +55,12 @@ public class TestAuto extends CommandOpMode {
         farminator.periodic();
         follower.update();
         super.run();
+        farminator.telemetry.addData("pinpoint x: ", farminator.pinpoint.getPosition().getX(DistanceUnit.INCH));
+        farminator.telemetry.addData("pinpoint y: ", farminator.pinpoint.getPosition().getY(DistanceUnit.INCH));
+        farminator.telemetry.addData("pinpoint heading: ", farminator.pinpoint.getPosition().getHeading(AngleUnit.DEGREES));
+        farminator.telemetry.addData("follower x: ", follower.getPose().getX());
+        farminator.telemetry.addData("follower y: ", follower.getPose().getY());
+        farminator.telemetry.addData("follower heading: ", follower.getPose().getHeading());
         // DO NOT CHANGE THE ORDER !!
     }
 
@@ -76,7 +86,7 @@ public class TestAuto extends CommandOpMode {
                 new FollowPathCommand(follower, goForward),
                 new FollowPathCommand(follower, strafeAndTurn),
                 CommandGroup.shootCommand(),
-                new TurnToCommand(follower, START_POSE.getHeading())
+                new TurnToCommand(follower, START_POSE.getHeading()) // Preferably don't use, messes up heading
         );
     }
 }

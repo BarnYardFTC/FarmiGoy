@@ -17,4 +17,8 @@ public class Pinpoint {
     public void setPosition(Pose pose){
         pinpoint.setPosition(new Pose2D(DistanceUnit.INCH, pose.getX(), pose.getY(), AngleUnit.RADIANS, pose.getHeading()));
     }
+
+    public Pose2D getPosition() {
+        return pinpoint.getPosition();
+    }
 }
