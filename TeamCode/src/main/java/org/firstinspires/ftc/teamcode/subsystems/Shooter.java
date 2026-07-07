@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase {
     private static final double TICKS_PER_REVOLUTION = 28;
     private static final int MAX_RPM = 3030;
 
-    private static final double DETLA_TIME = 100;
+    private static final double DELTA_TIME = 100;
 
     private double kV = 0.000176, kS = 0.09, kP = 0.00145;
 
@@ -31,6 +31,7 @@ public class Shooter extends SubsystemBase {
     private int lastPosition;
     private double rpm;
 
+    private double tgtRpm;
 
     public Shooter() {
         
@@ -63,7 +64,7 @@ public class Shooter extends SubsystemBase {
         double deltaTime = currentTime - lastTime;
         int deltaPosition = currentPosition - lastPosition;
 
-        if(deltaTime >= DETLA_TIME) {
+        if(deltaTime >= DELTA_TIME) {
             rpm = (deltaPosition * 60 * 1000) / (TICKS_PER_REVOLUTION * deltaTime);
 
             lastPosition = currentPosition;
@@ -77,6 +78,7 @@ public class Shooter extends SubsystemBase {
 
     public void setMotorRPM(int rpm) {
         // call it every loop pls
+        tgtRpm = rpm;
 
         double feedForward = kV * rpm + kS;
         double error = rpm - getRPM();
@@ -97,6 +99,11 @@ public class Shooter extends SubsystemBase {
         }
 
         updateRPM();
+    }
+
+    public boolean isReady() {
+        if (tgtRpm == 0) return false;
+        return (rpm > tgtRpm - 70 && rpm < tgtRpm + 70);
     }
 
     public RunCommand operateRangeOneCommand() {

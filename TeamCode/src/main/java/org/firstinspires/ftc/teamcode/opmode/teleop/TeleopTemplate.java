@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmode.teleop;
 
+import com.seattlesolvers.solverslib.command.ParallelCommandGroup;
 import com.seattlesolvers.solverslib.command.button.Trigger;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
@@ -15,16 +16,17 @@ public class TeleopTemplate {
 
         farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
-        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
 
         // =========== BINDS ===========
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.5 && !CommandGroup.isShooting)
                 .whenActive(
-                        farminator.transfer.activateCommand()
+                        new ParallelCommandGroup(farminator.transfer.activateCommand(),
+                                farminator.intake.activateCommand())
                 )
                 .whenInactive(
-                        farminator.transfer.disableCommand()
+                        new ParallelCommandGroup(farminator.transfer.disableCommand(),
+                                farminator.intake.disableCommand())
                 );
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.5)

@@ -36,12 +36,12 @@ public class Intake extends SubsystemBase {
         motor.setPower(-1);
     }
 
-    public RunCommand activateCommand(){
-        return new RunCommand(this::activate, this);
+    public Command activateCommand(){
+        return new InstantCommand(this::activate, this);
     }
 
-    public RunCommand disableCommand(){
-        return new RunCommand(this::disable, this);
+    public Command disableCommand(){
+        return new InstantCommand(this::disable, this);
     }
 
     public RunCommand reversCommand() {
