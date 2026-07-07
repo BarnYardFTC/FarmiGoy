@@ -16,6 +16,8 @@ public class TeleopTemplate {
 
         farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
+        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
+        farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
 
         // =========== BINDS ===========
 
@@ -38,6 +40,14 @@ public class TeleopTemplate {
                 .whenActive(
                         CommandGroup.shootCommand()
                 );
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.DPAD_LEFT)
+                        .whenPressed(
+                                farminator.shooter.operateRangeFourCommand()
+                        );
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT)
+                        .whenPressed(
+                                farminator.shooter.operateRangeThreeCommand()
+                        );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
                 .whenPressed(
