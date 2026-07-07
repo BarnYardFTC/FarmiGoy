@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.opMode.teleop;
+package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.seattlesolvers.solverslib.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.geometry.Rotation2d;
-import com.sun.tools.javac.comp.Todo;
+
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.OpmodeData;
 

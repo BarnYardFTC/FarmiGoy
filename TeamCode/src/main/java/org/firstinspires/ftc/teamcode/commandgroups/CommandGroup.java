@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.commandGroups;
+package org.firstinspires.ftc.teamcode.commandgroups;
 
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;

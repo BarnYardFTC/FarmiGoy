@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.opMode.teleop;
+package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.seattlesolvers.solverslib.command.button.Trigger;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
-import org.firstinspires.ftc.teamcode.commandGroups.CommandGroup;
+import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
 
 public class TeleopTemplate {
     // TODO: Reset pinpoint
