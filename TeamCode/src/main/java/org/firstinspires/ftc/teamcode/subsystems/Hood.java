@@ -50,5 +50,8 @@ public class Hood extends SubsystemBase {
 
     }
 
+    public Command setPosCommand(double pos){
+        return new InstantCommand(()-> servo.setPosition(pos), this);
+    }
 }
 

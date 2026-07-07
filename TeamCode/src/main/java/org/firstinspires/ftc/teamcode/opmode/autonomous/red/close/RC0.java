@@ -8,7 +8,7 @@ import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.commandgroups.CommandGroup;
-import org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
+
 import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
@@ -21,6 +21,7 @@ public class RC0 extends CommandOpMode{
     public void initialize() {
         farminator = BarnRobot.getInstance();
         farminator.init(this);
+        farminator.hood.setPosCommand(0.75);
         follower = Constants.createFollower(hardwareMap);
         RCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
