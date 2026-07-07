@@ -25,7 +25,7 @@ public class RC0 extends CommandOpMode{
         follower = Constants.createFollower(hardwareMap);
         RCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.operateRangeTwoCommand(); // TBD
+        farminator.shooter.operateRangeThreeCommand(); // TBD
         schedule(autoRoutine());
     }
 
