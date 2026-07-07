@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.commandgroups;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.ParallelCommandGroup;
+import com.seattlesolvers.solverslib.command.ParallelRaceGroup;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.WaitCommand;
 import com.seattlesolvers.solverslib.command.WaitUntilCommand;
@@ -18,7 +19,10 @@ public class CommandGroup extends SequentialCommandGroup {
                 new InstantCommand(() -> isShooting = true),
                 farminator.transfer.activateCommand(),
                 farminator.intake.activateCommand(),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()), // If doesn't shoot it's this shit
+                new ParallelRaceGroup(
+                        new WaitUntilCommand(() -> farminator.shooter.isReady()), // If doesn't shoot it's this shit
+                        new WaitCommand(5000)
+                ),
                 farminator.gate.openCommand(),
                 new WaitCommand(1500),
                 farminator.gate.closeCommand(),

@@ -5,6 +5,7 @@ import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
@@ -123,4 +124,7 @@ public class Shooter extends SubsystemBase {
         return new RunCommand(() -> setMotorPower(0), this);
     }
 
+    public Command turnOffInstant() {
+        return new RunCommand(() -> setMotorPower(0), this);
+    }
 }

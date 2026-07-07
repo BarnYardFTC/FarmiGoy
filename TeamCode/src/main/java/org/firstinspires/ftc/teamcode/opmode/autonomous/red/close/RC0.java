@@ -43,6 +43,7 @@ public class RC0 extends CommandOpMode{
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
                 CommandGroup.shootCommand(),
+                farminator.shooter.turnOffInstant(),
                 new FollowPathCommand(follower, goLeave)
         );
     }

@@ -55,13 +55,13 @@ public class TestAuto extends CommandOpMode {
         farminator.periodic();
         follower.update();
         super.run();
+        // DO NOT CHANGE THE ORDER !!
         farminator.telemetry.addData("pinpoint x: ", farminator.pinpoint.getPosition().getX(DistanceUnit.INCH));
         farminator.telemetry.addData("pinpoint y: ", farminator.pinpoint.getPosition().getY(DistanceUnit.INCH));
         farminator.telemetry.addData("pinpoint heading: ", farminator.pinpoint.getPosition().getHeading(AngleUnit.DEGREES));
         farminator.telemetry.addData("follower x: ", follower.getPose().getX());
         farminator.telemetry.addData("follower y: ", follower.getPose().getY());
         farminator.telemetry.addData("follower heading: ", follower.getPose().getHeading());
-        // DO NOT CHANGE THE ORDER !!
     }
 
 
