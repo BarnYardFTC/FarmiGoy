@@ -12,7 +12,6 @@ import org.firstinspires.ftc.teamcode.util.Constants;
 @TeleOp
 public class TestPedroTeleop extends CommandOpMode {
     private BarnRobot farminator;
-    private Follower follower;
     private TeleopTemplate template;
     private final Pose START_POSE = new Pose(72, 72, Math.toRadians(0));
 
@@ -22,25 +21,24 @@ public class TestPedroTeleop extends CommandOpMode {
         farminator.init(this);
 
         template = new TeleopTemplate();
-        template.initControls(true);
+        template.initControls(true, hardwareMap);
 
-        follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(START_POSE);
-        follower.update();
+        template.follower.setStartingPose(START_POSE);
+        template.follower.update();
         waitForStart();
-        follower.startTeleopDrive();
+        template.follower.startTeleopDrive();
         farminator.hardware.setBrake();
     }
 
     @Override
     public void run() {
         farminator.periodic();
-        follower.update();
+        template.follower.update();
         super.run();
-        follower.setTeleOpDrive(
-                farminator.gamepadEx1.getLeftY(),
-                -farminator.gamepadEx1.getLeftX(),
-                -farminator.gamepadEx1.getRightX(),
+        template.follower.setTeleOpDrive(
+                farminator.gamepadEx1.getLeftY() * template.speedModifier,
+                -farminator.gamepadEx1.getLeftX() * template.speedModifier,
+                -farminator.gamepadEx1.getRightX() * template.speedModifier,
                 false
         );
     }

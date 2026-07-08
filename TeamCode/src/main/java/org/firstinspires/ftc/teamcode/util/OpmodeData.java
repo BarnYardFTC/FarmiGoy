@@ -28,12 +28,10 @@ public class OpmodeData {
 
     //Autonomous
     public OpmodeData(AllianceColor allianceColor,
-                      OpModeType opModeType,
-                      Pose2d initialPos) {
+                      OpModeType opModeType) {
 
         this.allianceColor = allianceColor;
         this.opModeType = opModeType;
-        this.initialPos = initialPos;
     }
 
     public static void setAutoFinishPose(Pose2d autoFinishPose){

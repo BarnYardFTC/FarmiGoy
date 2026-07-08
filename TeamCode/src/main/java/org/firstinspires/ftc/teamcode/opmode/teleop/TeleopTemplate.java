@@ -1,21 +1,26 @@
 package org.firstinspires.ftc.teamcode.opmode.teleop;
 
+import com.pedropathing.follower.Follower;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.command.Command;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.ParallelCommandGroup;
+import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.button.Trigger;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.CommandGroup;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 public class TeleopTemplate {
-    // TODO: Reset pinpoint
-    // TODO: use field centric once ready
     private BarnRobot farminator = BarnRobot.getInstance();
-
-    public void initControls(boolean isPedro){
-
+    public Follower follower;
+    public double speedModifier = 1;
+    public void initControls(boolean isPedro, HardwareMap hwMap){
+        follower = Constants.createFollower(hwMap);
         if (!isPedro) {
-            farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
+            farminator.drive.setDefaultCommand(farminator.drive.drivePedroTolerantCommand(follower));
         }
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
 //      farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
@@ -62,19 +67,11 @@ public class TeleopTemplate {
                         farminator.hood.raiseCommand()
                 );
 
-        if (!isPedro) {
-            farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
-                    .toggleWhenActive(
-                            () -> farminator.drive.mechanumDriveComponent.activateSlowMode(),
-                            () -> farminator.drive.mechanumDriveComponent.activateFastMode()
-                    );
-        }
-        else {
-            farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
-                    .whenActive(
-                            () -> farminator.pinpoint.reset()
-                    );
-        }
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
+                .toggleWhenActive(
+                        unifiedSlowModeCommand(),
+                        unifiedFastModeCommand()
+                );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.Y)
                 .toggleWhenPressed(
@@ -82,10 +79,29 @@ public class TeleopTemplate {
                         farminator.shooter.operateRangeThreeCommand()
                 );
 
+        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
+                .whenActive(
+                        () -> farminator.pinpoint.reset()
+                );
+
 //        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
 //                .toggleWhenPressed(
 //                        farminator.kickstand.activateCommand(),
 //                        farminator.kickstand.deactivateCommand()
 //                );
+    }
+
+    private Command unifiedFastModeCommand() {
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> farminator.drive.mechanumDriveComponent.activateFastMode()),
+                new InstantCommand(() -> speedModifier = 1)
+        );
+    }
+
+    private Command unifiedSlowModeCommand() {
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> farminator.drive.mechanumDriveComponent.activateSlowMode()),
+                new InstantCommand(() -> speedModifier = 0.1)
+        );
     }
 }

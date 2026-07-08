@@ -18,7 +18,7 @@ public class TestTeleOp extends CommandOpMode {
 
         farmigoy.limelight.setAlianceCol(true);
 
-        farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldoCommand());
+        farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldCentricCommand());
 
 //        new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
 //                .whenActive(

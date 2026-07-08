@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.util.OpmodeData;
 public class BlueTeleop extends CommandOpMode {
     private TeleopTemplate template;
     private BarnRobot farminator;
-    private OpmodeData opmodeData;
+    //private OpmodeData opmodeData;
 
     @Override
     public void initialize() {
@@ -20,13 +20,13 @@ public class BlueTeleop extends CommandOpMode {
         farminator.init(this);
 
         template = new TeleopTemplate();
-        template.initControls(false);
+        template.initControls(false, hardwareMap);
 
-        opmodeData = new OpmodeData(
-                OpmodeData.AllianceColor.BLUE,
-                OpmodeData.OpModeType.TELEOP,
-                new Pose2d(0, 0, new Rotation2d(0)),
-                0);
+//        opmodeData = new OpmodeData(
+//                OpmodeData.AllianceColor.BLUE,
+//                OpmodeData.OpModeType.TELEOP,
+//                new Pose2d(0, 0, new Rotation2d(0)),
+//                0);
 
         farminator.limelight.setAlianceCol(true);
     }

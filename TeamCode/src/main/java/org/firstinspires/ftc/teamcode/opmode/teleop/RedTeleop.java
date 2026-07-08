@@ -20,14 +20,14 @@ public class RedTeleop extends CommandOpMode {
         farminator.init(this);
 
         template = new TeleopTemplate();
-        template.initControls(false);
+        template.initControls(false, hardwareMap);
 
-        opmodeData = new OpmodeData(
-                OpmodeData.AllianceColor.RED,
-                OpmodeData.OpModeType.TELEOP,
-                new Pose2d(0, 0, new Rotation2d(0)),
-                0
-        );
+//        opmodeData = new OpmodeData(
+//                OpmodeData.AllianceColor.RED,
+//                OpmodeData.OpModeType.TELEOP,
+//                new Pose2d(0, 0, new Rotation2d(0)),
+//                0
+//        );
     }
 
     @Override
