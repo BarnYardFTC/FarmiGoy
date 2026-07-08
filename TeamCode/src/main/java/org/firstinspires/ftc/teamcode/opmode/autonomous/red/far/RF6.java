@@ -27,7 +27,7 @@ public class RF6 extends CommandOpMode {
         follower = Constants.createFollower(hardwareMap);
         RFTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.operateRangeTwoCommand(); // TBD
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
         schedule(autoRoutine());
     }
 

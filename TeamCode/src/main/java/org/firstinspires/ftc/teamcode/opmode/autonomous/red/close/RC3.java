@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.WaitCommand;
 import com.seattlesolvers.solverslib.command.WaitUntilCommand;
@@ -24,13 +25,12 @@ public class RC3 extends CommandOpMode{
     public void initialize() {
         farminator = BarnRobot.getInstance();
         farminator.init(this, new OpmodeData());
-        //farminator.hood.setPosCommand(0.65);
+        farminator.hood.setPosCommand(0.65);
         follower = Constants.createFollower(hardwareMap);
         RCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeTwoCommand());
         schedule(autoRoutine());
-        schedule(farminator.shooter.turnOffInstant());
     }
 
     @Override
@@ -54,7 +54,9 @@ public class RC3 extends CommandOpMode{
                 new WaitUntilCommand(() -> farminator.shooter.isReady()),
                 new WaitCommand(1000),
                 CommandGroup.shootCommand(),
-                new FollowPathCommand(follower, goLeave)
+                new FollowPathCommand(follower, goLeave),
+                new InstantCommand(() -> farminator.shooter.turnOffInstant()),
+                new InstantCommand(this::requestOpModeStop)
         );
     }
 }
