@@ -26,17 +26,15 @@ public class TeleopTemplate {
         }
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
 //      farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
-        farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
+//        farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
 
 
         // =========== BINDS ===========
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.5 && !CommandGroup.isShooting)
-                .whenActive(
+                .toggleWhenActive(
                         new ParallelCommandGroup(farminator.transfer.activateCommand(),
-                                farminator.intake.activateCommand())
-                )
-                .whenInactive(
+                                farminator.intake.activateCommand()),
                         new ParallelCommandGroup(farminator.transfer.disableCommand(),
                                 farminator.intake.disableCommand())
                 );
