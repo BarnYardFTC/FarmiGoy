@@ -41,4 +41,12 @@ public class CommandGroup extends SequentialCommandGroup {
                 farminator.transfer.disableCommand()
         );
     }
+
+    public static Command autoShootingSequence(){
+        return new SequentialCommandGroup(
+            new WaitUntilCommand(() -> farminator.shooter.isReady()),
+            new WaitCommand(1000),
+            shootCommand()
+        );
+    }
 }

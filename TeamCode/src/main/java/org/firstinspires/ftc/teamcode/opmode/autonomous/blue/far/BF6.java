@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode.opmode.autonomous.red.close;
+package org.firstinspires.ftc.teamcode.opmode.autonomous.blue.far;
+
+import static org.firstinspires.ftc.teamcode.opmode.autonomous.blue.far.BFTemplate.START_POSE;
 
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,18 +8,18 @@ import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
-import com.seattlesolvers.solverslib.command.WaitCommand;
-import com.seattlesolvers.solverslib.command.WaitUntilCommand;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
+
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.CommandGroup;
-
-import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
-@Autonomous(name = "RC0", group = "RC")
-public class RC0 extends CommandOpMode{
+import static org.firstinspires.ftc.teamcode.opmode.autonomous.blue.far.BFTemplate.*;
+
+
+@Autonomous(name="BF6", group = "BF")
+public class BF6 extends CommandOpMode {
     BarnRobot farminator;
     Follower follower;
 
@@ -25,9 +27,8 @@ public class RC0 extends CommandOpMode{
     public void initialize() {
         farminator = BarnRobot.getInstance();
         farminator.init(this, new OpmodeData());
-        farminator.hood.setPosCommand(0.65);
         follower = Constants.createFollower(hardwareMap);
-        RCTemplate.buildPathChains(follower);
+        BFTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
         schedule(autoRoutine());
@@ -38,12 +39,21 @@ public class RC0 extends CommandOpMode{
         farminator.periodic();
         follower.update();
         super.run();
-        farminator.telemetry.addData("shooter is ready:", farminator.shooter.isReady());
     }
 
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
+                CommandGroup.autoShootingSequence(),
+                CommandGroup.enableIntakeTransferCommand(),
+                new FollowPathCommand(follower, goCollectDown),
+                CommandGroup.disableIntakeTransferCommand(),
+                new FollowPathCommand(follower, goShootDown),
+                CommandGroup.autoShootingSequence(),
+                CommandGroup.enableIntakeTransferCommand(),
+                new FollowPathCommand(follower, goCollectHuman),
+                CommandGroup.disableIntakeTransferCommand(),
+                new FollowPathCommand(follower, goShootHuman),
                 CommandGroup.autoShootingSequence(),
                 new FollowPathCommand(follower, goLeave),
                 new InstantCommand(this::requestOpModeStop)

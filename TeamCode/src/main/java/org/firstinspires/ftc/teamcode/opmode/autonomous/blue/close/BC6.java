@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmode.autonomous.red.close;
+package org.firstinspires.ftc.teamcode.opmode.autonomous.blue.close;
 
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -9,15 +9,16 @@ import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.WaitCommand;
 import com.seattlesolvers.solverslib.command.WaitUntilCommand;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
+import static org.firstinspires.ftc.teamcode.opmode.autonomous.blue.close.BCTemplate.*;
+
+
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.CommandGroup;
-
-import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
-@Autonomous(name = "RC0", group = "RC")
-public class RC0 extends CommandOpMode{
+@Autonomous(name = "BC6", group = "BC")
+public class BC6 extends CommandOpMode {
     BarnRobot farminator;
     Follower follower;
 
@@ -27,9 +28,9 @@ public class RC0 extends CommandOpMode{
         farminator.init(this, new OpmodeData());
         farminator.hood.setPosCommand(0.65);
         follower = Constants.createFollower(hardwareMap);
-        RCTemplate.buildPathChains(follower);
+        BCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand()); // TBD
         schedule(autoRoutine());
     }
 
@@ -38,15 +39,24 @@ public class RC0 extends CommandOpMode{
         farminator.periodic();
         follower.update();
         super.run();
-        farminator.telemetry.addData("shooter is ready:", farminator.shooter.isReady());
     }
 
-    private Command autoRoutine() {
+    public Command autoRoutine(){
         return new SequentialCommandGroup(
-                new FollowPathCommand(follower, goShootPre),
-                CommandGroup.autoShootingSequence(),
-                new FollowPathCommand(follower, goLeave),
-                new InstantCommand(this::requestOpModeStop)
+            new FollowPathCommand(follower, goShootPre),
+            CommandGroup.autoShootingSequence(),
+            CommandGroup.enableIntakeTransferCommand(),
+            new FollowPathCommand(follower, goCollectUpper),
+            CommandGroup.disableIntakeTransferCommand(),
+            new FollowPathCommand(follower, goShootUpper),
+            CommandGroup.autoShootingSequence(),
+            CommandGroup.enableIntakeTransferCommand(),
+            new FollowPathCommand(follower, goCollectMid),
+            CommandGroup.disableIntakeTransferCommand(),
+            new FollowPathCommand(follower, goShootMid),
+            CommandGroup.autoShootingSequence(),
+            new FollowPathCommand(follower, goLeave),
+            new InstantCommand(this::requestOpModeStop)
         );
     }
 }

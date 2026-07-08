@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.pedroCommand.FollowPathCommand;
 import org.firstinspires.ftc.teamcode.BarnRobot;
@@ -25,7 +26,7 @@ public class BC0 extends CommandOpMode{
         follower = Constants.createFollower(hardwareMap);
         BCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.operateRangeTwoCommand(); // TBD
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand()); // TBD
         schedule(autoRoutine());
     }
 
@@ -39,8 +40,9 @@ public class BC0 extends CommandOpMode{
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
-                CommandGroup.shootCommand(),
-                new FollowPathCommand(follower, goLeave)
+                CommandGroup.autoShootingSequence(),
+                new FollowPathCommand(follower, goLeave),
+                new InstantCommand(this::requestOpModeStop)
         );
     }
 }

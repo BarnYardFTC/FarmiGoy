@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.command.InstantCommand;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.command.WaitCommand;
 import com.seattlesolvers.solverslib.command.WaitUntilCommand;
@@ -41,24 +42,19 @@ public class RF6 extends CommandOpMode {
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()),
-                new WaitCommand(1000),
-                CommandGroup.shootCommand(),
+                CommandGroup.autoShootingSequence(),
                 CommandGroup.enableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goCollectFar),
                 CommandGroup.disableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goFarShoot),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()),
-                new WaitCommand(1000),
-                CommandGroup.shootCommand(),
+                CommandGroup.autoShootingSequence(),
                 CommandGroup.enableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goHumanCollect),
                 CommandGroup.disableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goShootHuman),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()),
-                new WaitCommand(1000),
-                CommandGroup.shootCommand(),
-                new FollowPathCommand(follower, goLeave)
+                CommandGroup.autoShootingSequence(),
+                new FollowPathCommand(follower, goLeave),
+                new InstantCommand(this::requestOpModeStop)
         );
     }
 }

@@ -29,7 +29,7 @@ public class RC3 extends CommandOpMode{
         follower = Constants.createFollower(hardwareMap);
         RCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);
-        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeTwoCommand());
+        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
         schedule(autoRoutine());
     }
 
@@ -44,18 +44,13 @@ public class RC3 extends CommandOpMode{
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()),
-                new WaitCommand(1000),
-                CommandGroup.shootCommand(),
+                CommandGroup.autoShootingSequence(),
                 CommandGroup.enableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goCollectClose),
                 CommandGroup.disableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goShootClose),
-                new WaitUntilCommand(() -> farminator.shooter.isReady()),
-                new WaitCommand(1000),
-                CommandGroup.shootCommand(),
+                CommandGroup.autoShootingSequence(),
                 new FollowPathCommand(follower, goLeave),
-                new InstantCommand(() -> farminator.shooter.turnOffInstant()),
                 new InstantCommand(this::requestOpModeStop)
         );
     }
