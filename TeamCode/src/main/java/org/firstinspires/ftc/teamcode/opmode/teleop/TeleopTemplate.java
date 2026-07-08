@@ -15,12 +15,11 @@ public class TeleopTemplate {
     public void initControls(boolean isPedro){
 
         if (!isPedro) {
-            farminator.drive.setDefaultCommand(farminator.drive.driveCommand());
-        }
-        farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
+            farminator.drive.setDefaultCommand(farminator.drive.driveNonFieldoCommand());
+            farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
 //        farminator.intake.setDefaultCommand(farminator.intake.activateCommand());
-        farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
-
+            farminator.hood.setDefaultCommand(farminator.hood.autoHoodCommand());
+        }
         // =========== BINDS ===========
 
         new Trigger(() -> farminator.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.5 && !CommandGroup.isShooting)
