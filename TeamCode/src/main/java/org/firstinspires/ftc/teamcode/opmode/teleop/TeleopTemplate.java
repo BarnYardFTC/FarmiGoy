@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmode.teleop;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.Command;
 import com.seattlesolvers.solverslib.command.InstantCommand;
@@ -12,6 +13,7 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.CommandGroup;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 public class TeleopTemplate {
     private BarnRobot farminator = BarnRobot.getInstance();
@@ -81,7 +83,7 @@ public class TeleopTemplate {
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
                 .whenActive(
-                        () -> farminator.pinpoint.reset()
+                        resetFieldo()
                 );
 
 //        farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.X)
@@ -101,7 +103,15 @@ public class TeleopTemplate {
     private Command unifiedSlowModeCommand() {
         return new SequentialCommandGroup(
                 new InstantCommand(() -> farminator.drive.mechanumDriveComponent.activateSlowMode()),
-                new InstantCommand(() -> speedModifier = 0.1)
+                new InstantCommand(() -> speedModifier = 0.5)
+        );
+    }
+
+    private Command resetFieldo() {
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> farminator.pinpoint.reset()),
+                new InstantCommand(() -> follower.setPose(
+                        new Pose(0, 0, farminator.opmodeData.initialBotHeading)))
         );
     }
 }

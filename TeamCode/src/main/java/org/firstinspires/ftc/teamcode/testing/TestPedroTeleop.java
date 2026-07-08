@@ -19,7 +19,7 @@ public class TestPedroTeleop extends CommandOpMode {
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this, new OpmodeData());
+        farminator.init(this, new OpmodeData(OpmodeData.AllianceColor.RED, 0));
 
         template = new TeleopTemplate();
         template.initControls(true, hardwareMap);
@@ -29,6 +29,7 @@ public class TestPedroTeleop extends CommandOpMode {
         waitForStart();
         template.follower.startTeleopDrive();
         farminator.hardware.setBrake();
+
     }
 
     @Override

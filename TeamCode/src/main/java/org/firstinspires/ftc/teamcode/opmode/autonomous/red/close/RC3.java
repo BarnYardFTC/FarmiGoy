@@ -30,6 +30,7 @@ public class RC3 extends CommandOpMode{
         follower.setStartingPose(START_POSE);
         farminator.shooter.setDefaultCommand(farminator.shooter.operateRangeThreeCommand());
         schedule(autoRoutine());
+        schedule(farminator.shooter.turnOffInstant());
     }
 
     @Override
@@ -43,13 +44,16 @@ public class RC3 extends CommandOpMode{
     private Command autoRoutine() {
         return new SequentialCommandGroup(
                 new FollowPathCommand(follower, goShootPre),
+                new WaitUntilCommand(() -> farminator.shooter.isReady()),
+                new WaitCommand(1000),
                 CommandGroup.shootCommand(),
                 CommandGroup.enableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goCollectClose),
                 CommandGroup.disableIntakeTransferCommand(),
                 new FollowPathCommand(follower, goShootClose),
+                new WaitUntilCommand(() -> farminator.shooter.isReady()),
+                new WaitCommand(1000),
                 CommandGroup.shootCommand(),
-                //farminator.shooter.turnOffInstant(),
                 new FollowPathCommand(follower, goLeave)
         );
     }
