@@ -21,7 +21,7 @@ public class Hood extends SubsystemBase {
 
 
     public Hood(){
-        initInterpLUT();
+//        initInterpLUT();
 
         servo = BarnRobot.getInstance().hardware.hoodServo;
         servo.setDirection(Servo.Direction.REVERSE);
