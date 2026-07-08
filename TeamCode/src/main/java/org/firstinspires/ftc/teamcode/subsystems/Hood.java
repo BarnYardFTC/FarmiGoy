@@ -14,11 +14,8 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 public class Hood extends SubsystemBase {
     public static double DEFAULT_POS = 0.8;
     private Servo servo;
-    private InterpLUT interpLUT;
-
     private final double MAX = 0.95;
     private final double MIN = 0.35;
-
 
     public Hood(){
         servo = BarnRobot.getInstance().hardware.hoodServo;
@@ -36,11 +33,6 @@ public class Hood extends SubsystemBase {
         if(servo.getPosition()+0.1<=MAX){
             servo.setPosition(servo.getPosition()+0.1);
         }
-    }
-
-    public double getPosition(){
-        return servo.getPosition();
-
     }
 
     public Command lowerCommand(){

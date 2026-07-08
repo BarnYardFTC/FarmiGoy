@@ -63,7 +63,7 @@ public class TeleopTemplate {
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.B)
                 .toggleWhenActive(
                         farminator.drive.activateSlowMode(),
-                        farminator.drive.activateSlowMode()
+                        farminator.drive.activateFastMode()
                 );
 
         farminator.gamepadEx1.getGamepadButton(GamepadKeys.Button.Y)

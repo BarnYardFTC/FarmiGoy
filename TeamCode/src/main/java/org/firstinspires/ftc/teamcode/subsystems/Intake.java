@@ -12,39 +12,18 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 public class Intake extends SubsystemBase {
     private DcMotor motor;
 
-
     public Intake() {
         motor = BarnRobot.getInstance().hardware.intakeMotor;
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor.setDirection(DcMotorSimple.Direction.FORWARD);
-
-    }
-
-    private void activate() {
-
-        motor.setPower(1);
-
-    }
-
-    private void disable() {
-
-        motor.setPower(0);
-
-    }
-    private void reverse() {
-        motor.setPower(-1);
     }
 
     public Command activateCommand(){
-        return new InstantCommand(this::activate, this);
+        return new InstantCommand(() -> motor.setPower(1), this);
     }
 
     public Command disableCommand(){
-        return new InstantCommand(this::disable, this);
-    }
-
-    public RunCommand reversCommand() {
-        return new RunCommand(this::reverse, this);
+        return new InstantCommand(() -> motor.setPower(1), this);
     }
 }

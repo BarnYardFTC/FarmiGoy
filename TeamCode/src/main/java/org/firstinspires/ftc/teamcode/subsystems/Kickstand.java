@@ -16,10 +16,8 @@ public class Kickstand extends SubsystemBase{
     public Kickstand(){
         rightServo = BarnRobot.getInstance().hardware.rightKickStand;
         leftServo = BarnRobot.getInstance().hardware.leftKickStand;
-
         rightServo.setDirection(Servo.Direction.REVERSE);
         leftServo.setDirection(Servo.Direction.FORWARD);
-
         setPos(MIN);
     }
 

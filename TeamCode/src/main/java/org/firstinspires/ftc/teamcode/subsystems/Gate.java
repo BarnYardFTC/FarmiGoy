@@ -11,10 +11,7 @@ import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class Gate extends SubsystemBase {
     private Servo rightServo, leftServo;
-
-    private boolean isOpen = false;
     private final double MIN = 0.88;
-
     private final double MAX = 1;
 
     public Gate(){
@@ -31,11 +28,9 @@ public class Gate extends SubsystemBase {
     }
     private void close(){
         setPosition(MIN);
-        isOpen = false;
     }
     private void open() {
         setPosition(MAX);
-        isOpen = true;
     }
     public Command openCommand(){
         return new InstantCommand(()-> open(),this);
