@@ -14,7 +14,6 @@ import org.firstinspires.ftc.teamcode.util.CommandGroup;
 
 import static org.firstinspires.ftc.teamcode.opmode.autonomous.red.close.RCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
-import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @Autonomous(name = "RC0", group = "RC")
 public class RC0 extends CommandOpMode{
@@ -24,7 +23,7 @@ public class RC0 extends CommandOpMode{
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this, new OpmodeData());
+        farminator.init(this);
         farminator.hood.setPosCommand(0.65);
         follower = Constants.createFollower(hardwareMap);
         RCTemplate.buildPathChains(follower);
