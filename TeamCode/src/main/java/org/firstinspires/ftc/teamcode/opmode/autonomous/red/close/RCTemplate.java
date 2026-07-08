@@ -9,8 +9,8 @@ import com.pedropathing.paths.PathChain;
 public class RCTemplate {
     static final Pose START_POSE = new Pose(116.31461434370773, 127.48037889039247, Math.toRadians(37));
     static final Pose SHOOT_POSE = new Pose(96, 96, Math.toRadians(45));
-    static final Pose CLOSE_COLLECT_POSE = new Pose(120, 82.0682796507215, Math.toRadians(0));
-    static final Pose CLOSE_COLLECT_CURVE = new Pose(73.80455075845974, 77.60210035005835);
+    static final Pose UPPER_COLLECT_POSE = new Pose(121, 82.0682796507215, Math.toRadians(0));
+    static final Pose UPPER_COLLECT_CURVE = new Pose(74.96032672112021, 80.57409568261377);
     static final Pose LEAVE_POSE = new Pose(119.306, 106.894, Math.toRadians(45));
 
     static PathChain goShootPre, goCollectClose, goLeave, goShootClose;
@@ -22,13 +22,13 @@ public class RCTemplate {
                 .build();
 
         goCollectClose = follower.pathBuilder()
-                .addPath(new BezierCurve(SHOOT_POSE, CLOSE_COLLECT_CURVE, CLOSE_COLLECT_POSE))
-                .setLinearHeadingInterpolation(Math.toRadians(SHOOT_POSE.getHeading()), Math.toRadians(CLOSE_COLLECT_POSE.getHeading()))
+                .addPath(new BezierCurve(SHOOT_POSE, UPPER_COLLECT_CURVE, UPPER_COLLECT_POSE))
+                .setLinearHeadingInterpolation(SHOOT_POSE.getHeading(), UPPER_COLLECT_POSE.getHeading())
                 .build();
 
         goShootClose = follower.pathBuilder()
-                .addPath(new BezierLine(CLOSE_COLLECT_POSE, SHOOT_POSE))
-                .setLinearHeadingInterpolation(Math.toRadians(CLOSE_COLLECT_POSE.getHeading()), Math.toRadians(SHOOT_POSE.getHeading()))
+                .addPath(new BezierLine(UPPER_COLLECT_POSE, SHOOT_POSE))
+                .setLinearHeadingInterpolation(UPPER_COLLECT_POSE.getHeading(), SHOOT_POSE.getHeading())
                 .build();
 
         goLeave = follower.pathBuilder()
