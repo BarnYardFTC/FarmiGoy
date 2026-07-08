@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems.components;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
-import com.pedropathing.ftc.localization.localizers.PinpointLocalizer;
+import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -33,13 +33,13 @@ public class MechanumDriveComponent {
             initMotor(DcMotorSimple.Direction.REVERSE, leftBack);
             initMotor(DcMotorSimple.Direction.FORWARD, rightBack);
         } catch (Exception e) {
-            telemetry.addData("couldn't find drivetrain motors", e);
+            BarnRobot.getInstance().telemetry.addData("couldn't find drivetrain motors", e);
         }
 
         try {
             initData();
         } catch (Exception e) {
-            telemetry.addData("couldn't find init data", e);
+            BarnRobot.getInstance().telemetry.addData("couldn't find init data", e);
         }
     }
 
@@ -103,6 +103,12 @@ public class MechanumDriveComponent {
     public void driveNonFieldCentric(double x, double y, double turn) {
         setSpeed(x, y, turn);
         translateSpeedToPower();
+    }
+
+    public void drivePepeTolerant(Follower follower, double x, double y, double turn){
+        if (!follower.isBusy()) {
+            driveNonFieldCentric(x, y, turn);
+        }
     }
 
     public void adjustSpeedForHeading(double heading) {

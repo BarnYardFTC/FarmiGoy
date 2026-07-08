@@ -122,6 +122,7 @@ public class LimeLight extends SubsystemBase {
     }
 
     //todo: Requires bot heading from pinpoint
+    //nothing stops you lol
 //    public Pose2D getBotPose(){
 //        if (llResult.getBotpose_MT2() != null){
 //            Pose2D currentPos = new Pose2D(llResult.getBotpose_MT2().getPosition().x / 0.0254 ,llResult.getBotpose_MT2().getPosition().y / 0.0254);

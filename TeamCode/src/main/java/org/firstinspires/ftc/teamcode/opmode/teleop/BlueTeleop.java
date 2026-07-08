@@ -18,7 +18,7 @@ public class BlueTeleop extends CommandOpMode {
         farminator.init(this, new OpmodeData(OpmodeData.AllianceColor.BLUE, 0));
 
         template = new TeleopTemplate();
-        template.initControls(false);
+        template.initControls(false, hardwareMap);
 
     }
 
