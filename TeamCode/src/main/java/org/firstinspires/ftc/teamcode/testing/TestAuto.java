@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.util.CommandGroup;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @Autonomous(name="TestAuto", group="test")
 public class TestAuto extends CommandOpMode {
@@ -39,7 +40,7 @@ public class TestAuto extends CommandOpMode {
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this);
+        farminator.init(this, new OpmodeData());
 
         follower = Constants.createFollower(hardwareMap);
         buildPaths();

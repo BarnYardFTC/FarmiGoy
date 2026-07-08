@@ -9,6 +9,7 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystems.*;
 import org.firstinspires.ftc.teamcode.util.Hardware;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 public class BarnRobot extends Robot {
 
@@ -45,7 +46,7 @@ public class BarnRobot extends Robot {
     //Robot Data
     public static boolean isRobotInitialized = false;
     //TODO: opmode data
-
+    public OpmodeData opmodeData;
 
     //Singleton Accessor
     public static synchronized BarnRobot getInstance() {
@@ -59,7 +60,8 @@ public class BarnRobot extends Robot {
 
     //farminator initialization
 
-    public void init(OpMode opMode){
+    public void init(OpMode opMode, OpmodeData opmodeData){
+        this.opmodeData = opmodeData;
 
         this.hardware = new Hardware(opMode.hardwareMap);
         this.telemetry = opMode.telemetry;

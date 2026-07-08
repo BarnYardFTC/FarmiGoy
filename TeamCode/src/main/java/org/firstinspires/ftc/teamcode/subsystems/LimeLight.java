@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.BarnRobot;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class LimeLight extends SubsystemBase {
     private final int farBluePipeline = 6;
     private final int farRedPipeline = 5;
 
-    boolean alianceCol = false; // false - blue true - red
 
 
     public LimeLight(){
@@ -56,7 +56,7 @@ public class LimeLight extends SubsystemBase {
     public boolean isGoalDetected(){
         if (isDataValid()){
             for (LLResultTypes.FiducialResult fr : frs){
-                if ((fr.getFiducialId() == 20 && !alianceCol) || (fr.getFiducialId() == 24 && alianceCol)){
+                if ((fr.getFiducialId() == 20 && BarnRobot.getInstance().opmodeData.allianceColor == OpmodeData.AllianceColor.BLUE) || (fr.getFiducialId() == 24 && BarnRobot.getInstance().opmodeData.allianceColor == OpmodeData.AllianceColor.RED)){
                     return true;
                 }
             }
@@ -111,24 +111,14 @@ public class LimeLight extends SubsystemBase {
         return goalYaw;
     }
 
-    public int choosePipeline(){
-        if (getGoalDistance() > 2.8){
-            if (alianceCol) return farRedPipeline;
-            return farBluePipeline;
-        }
-        return closePipeline;
-    }
 
-    public void setAlianceCol(boolean alCol){
-        alianceCol = alCol;
-    }
+
 
     @Override
     public void periodic() {
         super.periodic();
         llResult = limelight.getLatestResult();
         frs = llResult.getFiducialResults();
-        limelight.pipelineSwitch(choosePipeline());
     }
 
     //todo: Requires bot heading from pinpoint
@@ -139,7 +129,6 @@ public class LimeLight extends SubsystemBase {
 //    }
 
     public void displayTelemetry(Telemetry telemetry){
-        telemetry.addData("Current pipeline: ", choosePipeline());
         telemetry.addData("Data valid: ", isDataValid());
 
 

@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.util.CommandGroup;
 
 import static org.firstinspires.ftc.teamcode.opmode.autonomous.blue.close.BCTemplate.*;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @Autonomous(name = "BC0", group = "BC")
 public class BC0 extends CommandOpMode{
@@ -20,7 +21,7 @@ public class BC0 extends CommandOpMode{
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this);
+        farminator.init(this, new OpmodeData());
         follower = Constants.createFollower(hardwareMap);
         BCTemplate.buildPathChains(follower);
         follower.setStartingPose(START_POSE);

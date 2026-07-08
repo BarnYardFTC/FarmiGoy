@@ -8,6 +8,7 @@ import com.seattlesolvers.solverslib.command.CommandOpMode;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 import org.firstinspires.ftc.teamcode.opmode.teleop.TeleopTemplate;
 import org.firstinspires.ftc.teamcode.util.Constants;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @TeleOp
 public class TestPedroTeleop extends CommandOpMode {
@@ -19,7 +20,7 @@ public class TestPedroTeleop extends CommandOpMode {
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this);
+        farminator.init(this, new OpmodeData());
 
         template = new TeleopTemplate();
         template.initControls(true);

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @Configurable
 @Disabled
@@ -20,7 +21,7 @@ public class kVTuner extends CommandOpMode {
     BarnRobot farmiGoy;
     public void initialize() {
         farmiGoy = BarnRobot.getInstance();
-        farmiGoy.init(this);
+        farmiGoy.init(this, new OpmodeData());
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
+import org.firstinspires.ftc.teamcode.util.OpmodeData;
 
 @TeleOp
 @Disabled
@@ -14,9 +15,7 @@ public class TestTeleOp extends CommandOpMode {
     @Override
     public void initialize() {
         farmigoy = BarnRobot.getInstance();
-        farmigoy.init(this);
-
-        farmigoy.limelight.setAlianceCol(true);
+        farmigoy.init(this, new OpmodeData());
 
         farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldoCommand());
 

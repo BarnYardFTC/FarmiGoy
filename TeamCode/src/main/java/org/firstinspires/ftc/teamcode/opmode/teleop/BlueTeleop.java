@@ -12,23 +12,14 @@ import org.firstinspires.ftc.teamcode.util.OpmodeData;
 public class BlueTeleop extends CommandOpMode {
     private TeleopTemplate template;
     private BarnRobot farminator;
-    private OpmodeData opmodeData;
-
     @Override
     public void initialize() {
         farminator = BarnRobot.getInstance();
-        farminator.init(this);
+        farminator.init(this, new OpmodeData(OpmodeData.AllianceColor.BLUE, 0));
 
         template = new TeleopTemplate();
         template.initControls(false);
 
-        opmodeData = new OpmodeData(
-                OpmodeData.AllianceColor.BLUE,
-                OpmodeData.OpModeType.TELEOP,
-                new Pose2d(0, 0, new Rotation2d(0)),
-                0);
-
-        farminator.limelight.setAlianceCol(true);
     }
 
     @Override
