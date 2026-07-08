@@ -21,8 +21,6 @@ public class Hood extends SubsystemBase {
 
 
     public Hood(){
-//        initInterpLUT();
-
         servo = BarnRobot.getInstance().hardware.hoodServo;
         servo.setDirection(Servo.Direction.REVERSE);
         servo.setPosition(DEFAULT_POS);
@@ -40,53 +38,17 @@ public class Hood extends SubsystemBase {
         }
     }
 
-    private void initInterpLUT() {
-        interpLUT = new InterpLUT();
-
-        interpLUT.add(0.05, 0.45);
-        interpLUT.add(0.87, 0.67);
-        interpLUT.add(1.15,0.73);
-        interpLUT.add(1.27,0.93);
-        interpLUT.add(1.5,0.93);
-        interpLUT.add(1.75,0.93);
-        interpLUT.add(2,0.95);
-
-        interpLUT.createLUT();
-    }
-
-    public void hoodPositionDependsDistance(double distance) {
-        if (distance < 0.03) {
-            distance = 0.1;
-        }
-
-        double position = interpLUT.get(distance);
-
-        servo.setPosition(position);
-    }
-
     public double getPosition(){
         return servo.getPosition();
 
     }
 
-    public void setHoodPositionDependsDistance() {
-        hoodPositionDependsDistance(BarnRobot.getInstance().limelight.getGoalDistance());
-    }
-
-    public Command autoHoodCommand() {
-        return new RunCommand(() -> setHoodPositionDependsDistance(), this);
-    }
-
     public Command lowerCommand(){
-
         return new InstantCommand(()-> lower(),this);
     }
     public Command raiseCommand(){
-
         return new InstantCommand(()-> raise(), this);
-
     }
-
     public Command setPosCommand(double pos){
         return new InstantCommand(()-> servo.setPosition(pos), this);
     }

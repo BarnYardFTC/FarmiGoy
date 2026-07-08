@@ -19,7 +19,6 @@ public class BlueTeleop extends CommandOpMode {
 
         template = new TeleopTemplate();
         template.initControls(false, hardwareMap);
-
     }
 
     @Override

@@ -1,14 +1,16 @@
-package org.firstinspires.ftc.teamcode.subsystems.components;
+package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
-import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.seattlesolvers.solverslib.command.Command;
+import com.seattlesolvers.solverslib.command.InstantCommand;
+import com.seattlesolvers.solverslib.command.RunCommand;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
-public class MechanumDriveComponent {
+/** Unified class for Drivetrain and Mechanum. We don't need to separate them anymore because difficult tasks are handled by Pepe. */
+public class MechanumDrivetrain extends SubsystemBase {
     private DcMotor leftFront = null;
     private DcMotor rightFront = null;
     private DcMotor leftBack = null;
@@ -21,8 +23,7 @@ public class MechanumDriveComponent {
 
     private static final double SLOW_SPEED = 0.5;
     private static final double FAST_SPEED = 1.0;
-
-    public MechanumDriveComponent() {
+    public MechanumDrivetrain(){
         try {
             this.leftFront = BarnRobot.getInstance().hardware.leftFrontDrivetrain;
             this.rightFront = BarnRobot.getInstance().hardware.rightFrontDrivetrain;
@@ -55,14 +56,6 @@ public class MechanumDriveComponent {
         spdY = 0;
         spdTurn = 0;
         activateFastMode();
-    }
-
-    public void activateFastMode() {
-        speedModifier = FAST_SPEED;
-    }
-
-    public void activateSlowMode() {
-        speedModifier = SLOW_SPEED;
     }
 
     public void translateSpeedToPower() {
@@ -105,23 +98,21 @@ public class MechanumDriveComponent {
         translateSpeedToPower();
     }
 
-    public void drivePepeTolerant(Follower follower, double x, double y, double turn){
-        if (!follower.isBusy()) {
-            driveNonFieldCentric(x, y, turn);
-        }
+    public Command activateFastMode() {
+        return new InstantCommand(() -> speedModifier = FAST_SPEED, this);
     }
 
-    public void adjustSpeedForHeading(double heading) {
-        double adjustedX = spdX * Math.cos(heading) + spdY * Math.sin(heading);
-        double adjustedY = -spdX * Math.sin(heading) + spdY * Math.cos(heading);
-
-        spdX = adjustedX;
-        spdY = adjustedY;
+    public Command activateSlowMode() {
+        return new InstantCommand(() -> speedModifier = SLOW_SPEED, this);
     }
 
-    public void driveFieldCentric(double x, double y, double turn, double heading){
-        setSpeed(x,y,turn * speedModifier);
-        adjustSpeedForHeading(heading);
-        translateSpeedToPower();
+    public Command driveCommand(){
+        return new RunCommand(
+                () -> driveNonFieldCentric(
+                        BarnRobot.getInstance().gamepadEx1.getLeftX(),
+                        BarnRobot.getInstance().gamepadEx1.getLeftY(),
+                        BarnRobot.getInstance().gamepadEx1.getRightX()
+                )
+        , this);
     }
 }

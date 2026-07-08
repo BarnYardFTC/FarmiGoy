@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.seattlesolvers.solverslib.command.Robot;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
@@ -19,7 +17,7 @@ public class BarnRobot extends Robot {
 
     //Subsystems
 
-    public Drivetrain drive;
+    public MechanumDrivetrain drive;
     public Gate gate;
     public Hood hood;
     public Intake intake;
@@ -108,7 +106,7 @@ public class BarnRobot extends Robot {
     }
 
     public void initDriveTrain(){
-        drive = new Drivetrain();
+        drive = new MechanumDrivetrain();
     }
 
     public void initTransfer() { transfer = new Transfer(); }

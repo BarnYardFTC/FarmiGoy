@@ -17,7 +17,7 @@ public class TestTeleOp extends CommandOpMode {
         farmigoy = BarnRobot.getInstance();
         farmigoy.init(this, new OpmodeData());
 
-        farmigoy.drive.setDefaultCommand(farmigoy.drive.driveNonFieldCentricCommand());
+        farmigoy.drive.setDefaultCommand(farmigoy.drive.driveCommand());
 
 //        new Trigger(() -> farmigoy.gamepadEx1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.05)
 //                .whenActive(

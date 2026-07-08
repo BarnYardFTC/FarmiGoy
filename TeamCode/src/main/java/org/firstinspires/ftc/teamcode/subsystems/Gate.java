@@ -10,14 +10,12 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 import org.firstinspires.ftc.teamcode.BarnRobot;
 
 public class Gate extends SubsystemBase {
-
     private Servo rightServo, leftServo;
 
     private boolean isOpen = false;
     private final double MIN = 0.88;
 
     private final double MAX = 1;
-
 
     public Gate(){
         rightServo = BarnRobot.getInstance().hardware.rightGateServo;
@@ -39,25 +37,10 @@ public class Gate extends SubsystemBase {
         setPosition(MAX);
         isOpen = true;
     }
-    public boolean isOpen(){return isOpen;}
-//    public void displayTelemetry(){
-//
-//
-//
-//
-//    }
     public Command openCommand(){
-
         return new InstantCommand(()-> open(),this);
     }
     public Command closeCommand(){
-
         return new InstantCommand(()-> close(), this);
-
     }
-
-
-
-
-
 }
